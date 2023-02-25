@@ -1,11 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
-using System.Data;
-using System.Drawing;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -17,12 +10,12 @@ namespace WindowsFormsApp1
             //checkBox1.Checked = Form2.IsFill;
             InitializeComponent();
         }
-        public static  int figure_selected=0;
-        public  int selected;
+        public static int figure_selected = 0;
+        public int selected;
         public static bool IsFill = false;
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
-            selected=listBox1.SelectedIndex;
+            selected = listBox1.SelectedIndex;
         }
 
         private void checkBox1_CheckedChanged(object sender, EventArgs e)
@@ -33,7 +26,7 @@ namespace WindowsFormsApp1
             }
             else
             {
-                IsFill = false; 
+                IsFill = false;
             }
         }
 

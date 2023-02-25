@@ -2,42 +2,51 @@
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
+using System.Threading.Tasks;
 using System.Windows.Forms;
-
-
-
-
-
 
 namespace WindowsFormsApp1
 {
 
-
     public partial class Form1 : Form
     {
-
         public Form1()
         {
-
             InitializeComponent();
         }
 
         private delegate void form1_del_call(string s, Form1 f1);
         public static int form_height = 500;
         public static int form_width = 500;
-       
-        public void new_form2_creation(String s, Form1 f1)
+          Form2 f22 = new Form2();
+        public async void new_form2_creation(String s, Form1 f1)
         {
-            Form2 f22 = new Form2();
+          
             f22.Text = s;
             f22.Height = form_height;
             f22.Width = form_width;
             f22.MdiParent = f1;
             f22.Show();
+            //async Task  getMousePos()
+            //{
+            //     int x = f22.X1;
+            //    int y = f22.Y1;
+            //    textBoxMousePosition.Text = x + "x" + y;
+            //}
+           // Parallel.Invoke(this.getMousePos());
+            //GetMousePosition(f22.X1, f22.Y1);
+
             saveAsToolStripMenuItem.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
         }
         form1_del_call f1dc;
+
+        public void GetMousePosition(int x, int y)
+        {
+           //  int x = f22.X1;
+           // int y = f22.Y1;
+            textBoxMousePosition.Text = x + "x" + y;
+        }
 
         private void newToolStripMenuItem2_Click(object sender, EventArgs e)
         {
@@ -48,18 +57,12 @@ namespace WindowsFormsApp1
 
         }
 
-
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-
             Form2 f22 = new Form2();
-
-
             f22.MdiParent = this;
             saveAsToolStripMenuItem.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
-
 
             Thread t = new Thread((ThreadStart)(() =>
             {
@@ -78,11 +81,7 @@ namespace WindowsFormsApp1
                         FileAccess.Read,
                         FileShare.Read
                         );
-                    // formatter.Serialize(stream, data.point_mas);
-                    //  data.point_mas = (PointF[,])formatter.Deserialize(stream);
-                    //data obj = new data();
-                   // formatter.Serialize(stream, obj);
-                  // obj = (data)formatter.Deserialize(stream);
+
                     data.mas = (int[,])formatter.Deserialize(stream);
                     data.point_mas = (System.Drawing.PointF[,])formatter.Deserialize(stream);
                     stream.Close();
@@ -97,12 +96,10 @@ namespace WindowsFormsApp1
             f22.Height = a.form_h;
             f22.Width = a.form_w;
 
-
             int fig_cnt_chk = 0;
             for (int x = 0; x < 100; x++)
             {
-                 if (data.mas[x, 0] != 0)
-               // if (data.mas[x][ 0] != 0)
+                if (data.mas[x, 0] != 0)
                 {
                     fig_cnt_chk++;
                 }
@@ -112,14 +109,9 @@ namespace WindowsFormsApp1
 
             f22.Show();
             f22.repaint();
-            
             Form2.IsChanged = false;
-
-
-
             saveAsToolStripMenuItem.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
-
         }
 
         public void saveToolStripMenuItem_Click(object sender, EventArgs e)
@@ -134,11 +126,8 @@ namespace WindowsFormsApp1
                     saveFileDialog.FilterIndex = 1;
                     saveFileDialog.RestoreDirectory = true;
 
-
-
                     if (saveFileDialog.ShowDialog() == DialogResult.OK)
                     {
-
                         BinaryFormatter formatter = new BinaryFormatter();
                         Stream stream = new FileStream(
                                saveFileDialog.FileName,
@@ -146,12 +135,8 @@ namespace WindowsFormsApp1
                                FileAccess.Write,
                                FileShare.None
                            );
-                        // data obj = new data();
-                        //  formatter.Serialize(stream, obj);
                         formatter.Serialize(stream, data.mas);
                         formatter.Serialize(stream, data.point_mas);
-
-
 
                         Text = saveFileDialog.FileName;
                     }
@@ -159,7 +144,6 @@ namespace WindowsFormsApp1
                 t.SetApartmentState(ApartmentState.STA);
                 t.Start();
                 t.Join();
-
             }
         }
 
@@ -169,21 +153,16 @@ namespace WindowsFormsApp1
             {
                 case DialogResult.Yes:
                     {
-
                         Thread t = new Thread((ThreadStart)(() =>
                             {
-
                                 SaveFileDialog saveFileDialog = new SaveFileDialog();
                                 saveFileDialog.InitialDirectory = Environment.CurrentDirectory;
                                 saveFileDialog.Filter = "txt files|*.txt|All files|*.*";
                                 saveFileDialog.FilterIndex = 1;
                                 saveFileDialog.RestoreDirectory = true;
 
-
-
                                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                                 {
-
                                     BinaryFormatter formatter = new BinaryFormatter();
                                     Stream stream = new FileStream(
                                            saveFileDialog.FileName,
@@ -191,12 +170,8 @@ namespace WindowsFormsApp1
                                            FileAccess.Write,
                                            FileShare.None
                                        );
-                                    // data obj = new data();
-                                    // formatter.Serialize(stream, obj);
                                     formatter.Serialize(stream, data.mas);
                                     formatter.Serialize(stream, data.point_mas);
-
-
 
                                     Text = saveFileDialog.FileName;
                                 }
@@ -204,18 +179,14 @@ namespace WindowsFormsApp1
                         t.SetApartmentState(ApartmentState.STA);
                         t.Start();
                         t.Join();
-
-
                     }
                     break;
                 case DialogResult.No:
                     {
                         return;
                     }
-
                 case DialogResult.Cancel:
-                    {
-
+                    { 
                         return;
                     }
             }
@@ -223,8 +194,6 @@ namespace WindowsFormsApp1
 
         private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
         {
-
-
             Thread t = new Thread((ThreadStart)(() =>
             {
                 SaveFileDialog saveFileDialog = new SaveFileDialog();
@@ -232,12 +201,8 @@ namespace WindowsFormsApp1
                 saveFileDialog.Filter = "txt files|*.txt|All files|*.*";
                 saveFileDialog.FilterIndex = 1;
                 saveFileDialog.RestoreDirectory = true;
-
-
-
                 if (saveFileDialog.ShowDialog() == DialogResult.OK)
                 {
-
                     BinaryFormatter formatter = new BinaryFormatter();
                     Stream stream = new FileStream(
                            saveFileDialog.FileName,
@@ -245,23 +210,15 @@ namespace WindowsFormsApp1
                            FileAccess.Write,
                            FileShare.None
                        );
-                   // data obj = new data();
-                   // formatter.Serialize(stream,obj);
-                    
                     formatter.Serialize(stream, data.mas);
                     formatter.Serialize(stream, data.point_mas);
-
                     Text = saveFileDialog.FileName;
                 }
             }));
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
             t.Join();
-
-
         }
-
-
 
         public void lineColorToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -270,29 +227,22 @@ namespace WindowsFormsApp1
             {
                 case DialogResult.OK:
                     {
-
                         Form2.pen_clr = color_diag.Color;
-
+                        textBoxPenColor.BackColor= color_diag.Color;
                     }
                     break;
                 case DialogResult.Cancel:
                     {
-
                         return;
                     }
             }
-
-
         }
 
         private void lineThicknessToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Form3 myDialog = new Form3();
             myDialog.ShowDialog(this);
-
-
-
-
+            textBoxPenSize.Text = myDialog.pen_width.ToString();
         }
 
         private void backgroundColorToolStripMenuItem_Click(object sender, EventArgs e)
@@ -302,14 +252,12 @@ namespace WindowsFormsApp1
             {
                 case DialogResult.OK:
                     {
-
                         Form2.pen_bg = color_diag.Color;
-                        // color_diag.Color.
+                        textBoxFillcolor.BackColor= color_diag.Color;
                     }
                     break;
                 case DialogResult.Cancel:
                     {
-
                         return;
                     }
             }
@@ -327,9 +275,8 @@ namespace WindowsFormsApp1
             myDialog.ShowDialog(this);
         }
 
-        private void pictureBox1_Click(object sender, EventArgs e)
+        private void textBoxMousePosition_TextChanged(object sender, EventArgs e)
         {
-
         }
     }
 }

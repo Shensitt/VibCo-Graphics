@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace WindowsFormsApp1
 {
-     class Curveline:AbstractFigure
+    class Curveline : AbstractFigure
     {
         public int x_beg; public int y_beg;
         public int x_beg1; public int y_beg1;
@@ -19,7 +14,7 @@ namespace WindowsFormsApp1
         //public static int wI;
         //public static int hE;
         Brush brush = new SolidBrush(pen_bg);
-        public override void GetPenSet(Color c, int i, Color b,bool fill)
+        public override void GetPenSet(Color c, int i, Color b, bool fill)
         {
             pen_clr = c;
             pen_wid = i;
@@ -50,14 +45,14 @@ namespace WindowsFormsApp1
         {
             Pen Rect_pen = new Pen(pen_clr, pen_wid);
             Rect_pen.DashStyle = System.Drawing.Drawing2D.DashStyle.Dash;
-            g.DrawCurve(Rect_pen,Form2.draw_point);
+            g.DrawCurve(Rect_pen, Form2.draw_point);
             //g.DrawLine(Rect_pen, x_beg, y_beg, x_beg1, y_beg1);
             //  g.FillEllipse(Brushes.White, x_beg + 1, y_beg + 1, x_beg1 - 1, y_beg1 - 1);
         }
         public override void Draw(Graphics g)
         {
             Pen Rect_pen = new Pen(pen_clr, pen_wid);
-            g.DrawCurve(Rect_pen,Form2.draw_point);
+            g.DrawCurve(Rect_pen, Form2.draw_point);
 
             //g.DrawLine(Rect_pen, x_beg, y_beg, x_beg1, y_beg1);
             // g.FillEllipse(brush, x_beg + 1, y_beg + 1, x_beg1 - 1, y_beg1 - 1);

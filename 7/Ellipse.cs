@@ -1,13 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Drawing;
+﻿using System.Drawing;
 
 namespace WindowsFormsApp1
 {
-     class Ellipse:AbstractFigure
+    class Ellipse : AbstractFigure
     {
         public int x_beg; public int y_beg;
         public int x_beg1; public int y_beg1;
@@ -18,7 +13,7 @@ namespace WindowsFormsApp1
         public static Color pen_bg = Color.White;
         static bool IsFill = false;
         Brush brush = new SolidBrush(pen_bg);
-        public override void GetPenSet(Color c, int i, Color b,bool fill)
+        public override void GetPenSet(Color c, int i, Color b, bool fill)
         {
             pen_clr = c;
             pen_wid = i;
@@ -45,7 +40,7 @@ namespace WindowsFormsApp1
             g.DrawEllipse(Rect_pen, x_beg, y_beg, x_beg1, y_beg1);
             if (IsFill == true)
             {
-            g.FillEllipse(Brushes.White, x_beg + 1, y_beg + 1, x_beg1 - 1, y_beg1 - 1);
+                g.FillEllipse(Brushes.White, x_beg + 1, y_beg + 1, x_beg1 - 1, y_beg1 - 1);
 
             }
         }

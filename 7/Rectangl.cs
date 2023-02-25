@@ -16,9 +16,9 @@ namespace WindowsFormsApp1
         public static Color pen_clr = Color.Black;
         public static int pen_wid = 1;
         public static Color pen_bg = Color.White;
-        static bool IsFill=false;
+        static bool IsFill = false;
         Brush brush = new SolidBrush(pen_bg);
-        public override void GetPenSet(Color c, int i, Color b,bool fill)
+        public override void GetPenSet(Color c, int i, Color b, bool fill)
         {
             pen_clr = c;
             pen_wid = i;
@@ -45,7 +45,7 @@ namespace WindowsFormsApp1
             g.DrawRectangle(Rect_pen, x_beg, y_beg, x_beg1, y_beg1);
             if (IsFill == true)
             {
-            g.FillRectangle(brush, x_beg + 1, y_beg + 1, x_beg1 - 1, y_beg1 - 1);
+                g.FillRectangle(brush, x_beg + 1, y_beg + 1, x_beg1 - 1, y_beg1 - 1);
 
             }
         }

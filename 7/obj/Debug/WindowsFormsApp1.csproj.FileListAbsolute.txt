@@ -299,3 +299,18 @@ D:\.Net\7\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
 D:\.Net\7\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
 D:\.Net\7\obj\Debug\WindowsFormsApp1.exe
 D:\.Net\7\obj\Debug\WindowsFormsApp1.pdb
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\bin\Debug\WindowsFormsApp1.exe.config
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\bin\Debug\WindowsFormsApp1.exe
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\bin\Debug\WindowsFormsApp1.pdb
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.csproj.SuggestedBindingRedirects.cache
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.Form1.resources
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.Form2.resources
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.Form3.resources
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.Form4.resources
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.Form5.resources
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.exe
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.pdb

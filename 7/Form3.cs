@@ -11,10 +11,6 @@ namespace WindowsFormsApp1
 
         }
 
-
-
-
-
         public int pen_width;
         public void button1_Click(object sender, EventArgs e)
         {

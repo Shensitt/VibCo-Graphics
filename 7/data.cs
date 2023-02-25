@@ -1,10 +1,11 @@
-﻿using System.Windows.Forms;
+﻿using System;
 using System.Drawing;
-using System;
+using System.Windows.Forms;
 
 
 namespace WindowsFormsApp1
-{[Serializable]
+{
+    [Serializable]
     public partial class data : Form
     {
         public data()
@@ -19,11 +20,11 @@ namespace WindowsFormsApp1
                                                     //9-form width
                                                     //10->selected figure
                                                     //11-fill
-       // public static int[][] mas = new int[100][];
+                                                    // public static int[][] mas = new int[100][];
         public int form_h = mas[0, 7];
         public int form_w = mas[0, 8];
         //public int form_h = mas[0][ 7];
         //public int form_w = mas[0][ 8];
-        public static PointF[,] point_mas = new PointF[100,1000];
+        public static PointF[,] point_mas = new PointF[100, 1000];
     }
 }
