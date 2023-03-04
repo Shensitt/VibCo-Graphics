@@ -34,6 +34,8 @@ namespace WindowsFormsApp1
             this.lineThicknessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.figureToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBoxPenSize = new System.Windows.Forms.TextBox();
@@ -45,9 +47,7 @@ namespace WindowsFormsApp1
             this.textBoxPictureSize = new System.Windows.Forms.TextBox();
             this.textBox5 = new System.Windows.Forms.TextBox();
             this.textBoxMousePosition = new System.Windows.Forms.TextBox();
-            this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.textBoxFont = new System.Windows.Forms.TextBox();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -166,6 +166,22 @@ namespace WindowsFormsApp1
             this.figureToolStripMenuItem.Text = "Figure";
             this.figureToolStripMenuItem.Click += new System.EventHandler(this.figureToolStripMenuItem_Click);
             // 
+            // textToolStripMenuItem
+            // 
+            this.textToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.fontToolStripMenuItem});
+            this.textToolStripMenuItem.Name = "textToolStripMenuItem";
+            this.textToolStripMenuItem.Size = new System.Drawing.Size(50, 24);
+            this.textToolStripMenuItem.Text = "Text";
+            this.textToolStripMenuItem.Click += new System.EventHandler(this.textToolStripMenuItem_Click);
+            // 
+            // fontToolStripMenuItem
+            // 
+            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(121, 26);
+            this.fontToolStripMenuItem.Text = "Font";
+            this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
+            // 
             // statusStrip1
             // 
             this.statusStrip1.Dock = System.Windows.Forms.DockStyle.Top;
@@ -256,6 +272,7 @@ namespace WindowsFormsApp1
             this.textBox5.Size = new System.Drawing.Size(100, 22);
             this.textBox5.TabIndex = 15;
             this.textBox5.Text = "Mouse position";
+            this.textBox5.Visible = false;
             // 
             // textBoxMousePosition
             // 
@@ -266,28 +283,18 @@ namespace WindowsFormsApp1
             this.textBoxMousePosition.Size = new System.Drawing.Size(88, 22);
             this.textBoxMousePosition.TabIndex = 16;
             this.textBoxMousePosition.Text = "1x1";
+            this.textBoxMousePosition.Visible = false;
             this.textBoxMousePosition.TextChanged += new System.EventHandler(this.textBoxMousePosition_TextChanged);
             // 
-            // textToolStripMenuItem
+            // textBoxFont
             // 
-            this.textToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sizeToolStripMenuItem,
-            this.fontToolStripMenuItem});
-            this.textToolStripMenuItem.Name = "textToolStripMenuItem";
-            this.textToolStripMenuItem.Size = new System.Drawing.Size(50, 24);
-            this.textToolStripMenuItem.Text = "Text";
-            // 
-            // sizeToolStripMenuItem
-            // 
-            this.sizeToolStripMenuItem.Name = "sizeToolStripMenuItem";
-            this.sizeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.sizeToolStripMenuItem.Text = "Size";
-            // 
-            // fontToolStripMenuItem
-            // 
-            this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
-            this.fontToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.fontToolStripMenuItem.Text = "Font";
+            this.textBoxFont.Enabled = false;
+            this.textBoxFont.Location = new System.Drawing.Point(681, 27);
+            this.textBoxFont.Name = "textBoxFont";
+            this.textBoxFont.Size = new System.Drawing.Size(637, 22);
+            this.textBoxFont.TabIndex = 19;
+            this.textBoxFont.Text = "Default Font";
+            this.textBoxFont.Visible = false;
             // 
             // Form1
             // 
@@ -297,6 +304,7 @@ namespace WindowsFormsApp1
             this.BackColor = System.Drawing.Color.White;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Center;
             this.ClientSize = new System.Drawing.Size(1344, 897);
+            this.Controls.Add(this.textBoxFont);
             this.Controls.Add(this.textBoxMousePosition);
             this.Controls.Add(this.textBox5);
             this.Controls.Add(this.textBoxPictureSize);
@@ -352,8 +360,8 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.TextBox textBox5;
         public System.Windows.Forms.TextBox textBoxMousePosition;
         private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
-        private System.Windows.Forms.ToolStripMenuItem sizeToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
+        public System.Windows.Forms.TextBox textBoxFont;
     }
 }
 

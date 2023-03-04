@@ -20,11 +20,11 @@ namespace WindowsFormsApp1
                                                     //9-form width
                                                     //10->selected figure
                                                     //11-fill
+                                                    //12-
                                                     // public static int[][] mas = new int[100][];
         public int form_h = mas[0, 7];
         public int form_w = mas[0, 8];
-        //public int form_h = mas[0][ 7];
-        //public int form_w = mas[0][ 8];
+        
         public static PointF[,] point_mas = new PointF[100, 1000];
     }
 }

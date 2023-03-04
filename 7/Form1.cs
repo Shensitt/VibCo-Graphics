@@ -271,12 +271,56 @@ namespace WindowsFormsApp1
 
         private void figureToolStripMenuItem_Click(object sender, EventArgs e)
         {
+            int fig_sel = Form5.figure_selected;
+
             Form5 myDialog = new Form5();
             myDialog.ShowDialog(this);
+
+            if (Form5.figure_selected != fig_sel)
+            {
+                textBoxFont.Visible= false;
+            }
         }
 
         private void textBoxMousePosition_TextChanged(object sender, EventArgs e)
         {
+        }
+
+        private void textToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form5.figure_selected = 4;//text
+            textBoxFont.Visible= true;
+        }
+
+        private void sizeToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Form3 myDialog = new Form3();
+            myDialog.ShowDialog(this);
+            textBoxPenSize.Text = myDialog.pen_width.ToString();
+        }
+
+        private void fontToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            FontDialog fontDialog= new FontDialog();
+            switch (fontDialog.ShowDialog())
+            {
+                case DialogResult.OK:
+                    {
+                        Form2.font=fontDialog.Font;
+                        textBoxFont.Text=fontDialog.Font.ToString();
+                    }
+                    break;
+                case DialogResult.Cancel:
+                    {
+                        return;
+                    }
+            }
+
+        }
+
+        private void textBox6_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using System.Drawing;
+using System.Threading;
 using System.Windows.Forms;
 
 
@@ -34,8 +35,11 @@ namespace WindowsFormsApp1
         public static Color pen_clr = Color.Black;
         public static int pen_wid = 1;
         public static Color pen_bg = Color.White;
-        static int figure_selected;
+        public static int figure_selected;
         public static bool IsFill;
+        public static Font font=SystemFonts.DefaultFont;
+        public static string textString;
+        private bool enterDetected=false;
 
         PictureBox pic = new PictureBox();
 
@@ -115,6 +119,14 @@ namespace WindowsFormsApp1
                             str.Draw(g);
                         }
                         break;
+                    case 4:
+                        {
+                            Text txt=new Text();
+                            txt.GetPenSet(pen_clr, pen_wid, pen_bg, IsFill/*, form_width, form_height*/);
+                            txt.GetFont(font);
+                            txt.DrawFigureCordPoint1(X0, Y0);
+                        }
+                        break;
                 }
             }
 
@@ -144,7 +156,7 @@ namespace WindowsFormsApp1
             }
         }
 
-        private async void Form2_MouseMove(object sender, MouseEventArgs e)
+        private  void Form2_MouseMove(object sender, MouseEventArgs e)
         {
             Graphics gg = this.pic.CreateGraphics();
             pic.Width = this.Width;
@@ -233,6 +245,17 @@ namespace WindowsFormsApp1
 
                             str.GetPenSet(pen_clr, pen_wid, pen_bg, IsFill/*, form_width, form_height*/);
                             str.Draw(g);
+                        }
+                        break;
+                    case 4:
+                        {
+                            Text txt = new Text();
+                            txt.GetPenSet(pen_clr, pen_wid, pen_bg, IsFill/*, form_width, form_height*/);
+                            txt.GetFont(font);
+                            txt.DrawFigureCordPoint1(X0, Y0);
+                            txt.DrawFigureCordPoint2(X1, Y1);
+                            txt.DrawDash(g);
+                           
                         }
                         break;
                 }
@@ -329,6 +352,38 @@ namespace WindowsFormsApp1
                             }
 
                         }
+                        break;
+                    case 4:
+                        { 
+                            Text txt = new Text();
+                            txt.GetPenSet(pen_clr, pen_wid, pen_bg, IsFill/*, form_width, form_height*/);
+                            //txt.GetFont(font);
+                            txt.DrawFigureCordPoint1(X0, Y0);
+                            txt.DrawFigureCordPoint2(X1, Y1);
+                            // txt.Draw(g);
+                            textString = null;
+                            //font=txt.fo
+                            TextBox txt2 = new TextBox()
+                            {
+                                Parent = this,
+                                Location = new Point(X0, Y0),
+                                Size = new Size(X1 - X0, Y1 - Y0),
+                                Multiline = true,
+                                Font = font,
+                                ForeColor = Color.Black
+                            };
+                                                                      // доделать ввод текста 9 лаба
+                            //while (enterDetected == false)          // доделать ввод текста 9 лаба
+                            //{                                       // доделать ввод текста 9 лаба
+                            //    txt2.Text = textString;             // доделать ввод текста 9 лаба
+                            //    //textString=txt2.Text;             // доделать ввод текста 9 лаба
+                            //    //                                  // доделать ввод текста 9 лаба
+                            //}                                       // доделать ввод текста 9 лаба
+                            //txt2.Hide();                            // доделать ввод текста 9 лаба
+                            ////else { Thread.Sleep(1); }             // доделать ввод текста 9 лаба
+                            //enterDetected = false;                  // доделать ввод текста 9 лаба
+                            ////txt2.Dispose();                       // доделать ввод текста 9 лаба
+                        }                                             // доделать ввод текста 9 лаба
                         break;
                 }
             }
@@ -483,6 +538,20 @@ namespace WindowsFormsApp1
         private void Form2_Scroll(object sender, ScrollEventArgs e)
         {
             repaint();
+        }
+
+        private void Form2_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if (e.KeyData == Keys.Enter)
+            //{
+            //    enterDetected = true;
+            //}
+
+            //if (e.KeyCode != 0)
+            //{
+            //    textString += e.KeyCode.ToString();
+            //}
+
         }
     }
 
