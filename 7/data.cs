@@ -25,28 +25,6 @@ namespace WindowsFormsApp1
                                                     // public static int[][] mas = new int[100][];
 
         public static string[] saveArr=new string[100];//новый массив для сохзранения
-         //figure cords
-         //
-         //
-         //
-         //pen color
-         //fill color
-         //pen width
-         //form height
-         //form width
-         //selected figure
-         //fill (bool
-         //text string (if figure =text
-         //
-         //
-         //
-         //
-         //
-         //
-         //
-
-
-
 
 
         public int form_h = mas[0, 7];

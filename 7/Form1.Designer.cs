@@ -284,7 +284,6 @@ namespace WindowsFormsApp1
             this.textBoxMousePosition.TabIndex = 16;
             this.textBoxMousePosition.Text = "1x1";
             this.textBoxMousePosition.Visible = false;
-            this.textBoxMousePosition.TextChanged += new System.EventHandler(this.textBoxMousePosition_TextChanged);
             // 
             // textBoxFont
             // 

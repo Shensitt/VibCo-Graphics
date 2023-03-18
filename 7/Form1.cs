@@ -19,7 +19,7 @@ namespace WindowsFormsApp1
         public static int form_height = 500;
         public static int form_width = 500;
           Form2 f22 = new Form2();
-        public async void new_form2_creation(String s, Form1 f1)
+        public  void new_form2_creation(String s, Form1 f1)
         {
           
             f22.Text = s;
@@ -27,26 +27,11 @@ namespace WindowsFormsApp1
             f22.Width = form_width;
             f22.MdiParent = f1;
             f22.Show();
-            //async Task  getMousePos()
-            //{
-            //     int x = f22.X1;
-            //    int y = f22.Y1;
-            //    textBoxMousePosition.Text = x + "x" + y;
-            //}
-           // Parallel.Invoke(this.getMousePos());
-            //GetMousePosition(f22.X1, f22.Y1);
-
+           
             saveAsToolStripMenuItem.Enabled = true;
             saveToolStripMenuItem.Enabled = true;
         }
         form1_del_call f1dc;
-
-        public void GetMousePosition(int x, int y)
-        {
-           //  int x = f22.X1;
-           // int y = f22.Y1;
-            textBoxMousePosition.Text = x + "x" + y;
-        }
 
         private void newToolStripMenuItem2_Click(object sender, EventArgs e)
         {
@@ -54,7 +39,6 @@ namespace WindowsFormsApp1
             f1dc = new form1_del_call(new_form2_creation);
 
             f1dc(s, this);
-
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)
@@ -278,12 +262,8 @@ namespace WindowsFormsApp1
 
             if (Form5.figure_selected != fig_sel)
             {
-                textBoxFont.Visible= false;
+                textBoxFont.Visible = false;
             }
-        }
-
-        private void textBoxMousePosition_TextChanged(object sender, EventArgs e)
-        {
         }
 
         private void textToolStripMenuItem_Click(object sender, EventArgs e)
@@ -318,10 +298,7 @@ namespace WindowsFormsApp1
 
         }
 
-        private void textBox6_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+       
     }
 }
 

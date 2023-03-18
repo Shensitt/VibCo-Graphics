@@ -17,7 +17,7 @@ namespace WindowsFormsApp1
             textBox1.Visible = false;
         }
         bool draw_frag;
-        
+        Graphics g;
         int X0;
         int Y0;
         public int X1;
@@ -172,8 +172,6 @@ namespace WindowsFormsApp1
 
             X1 = e.X - X0/*-AutoScrollPosition.X*/;
             Y1 = e.Y - Y0/*-AutoScrollPosition.Y*/;
-           // Form1 form1= new Form1();
-            //form1.GetMousePosition(X1, Y1);
 
             if (draw_frag == true)
             {
@@ -353,10 +351,6 @@ namespace WindowsFormsApp1
 
                         }
                         break;
-                    case 4:
-                        {
-                        }                                          
-                        break;
                 }
             }
         
@@ -382,7 +376,6 @@ namespace WindowsFormsApp1
             {
                 mas[figure_count, 10] = 0;
             }
-            Console.WriteLine(textString);
             draw_point = null;
 
             data.point_mas = point_mas;
@@ -415,12 +408,10 @@ namespace WindowsFormsApp1
                 if (mas[xx, 10] == 1)
                 {
                     fill = true;
-
                 }
                 else
                 {
                     fill = false;
-
                 }
                 Color pen_col = Color.FromArgb(mas[xx, 4]);
                 int pen_width = mas[xx, 6];
@@ -430,7 +421,7 @@ namespace WindowsFormsApp1
                 {
                     case 0:
                         {
-                            rect.GetPenSet(pen_col, pen_width, fillcol, fill/*, form_width, form_height*/);
+                            rect.GetPenSet(pen_col, pen_width, fillcol, fill);
                             rect.DrawFigureCordPoint1(x0, y0);
                             rect.DrawFigureCordPoint2(x1, y1);
 
@@ -440,7 +431,7 @@ namespace WindowsFormsApp1
                     case 1:
                         {
                             var eli = new Ellipse();
-                            eli.GetPenSet(pen_col, pen_width, fillcol, fill/*, form_width, form_height*/);
+                            eli.GetPenSet(pen_col, pen_width, fillcol, fill);
 
                             eli.DrawFigureCordPoint1(x0, y0);
                             eli.DrawFigureCordPoint2(x1, y1);
@@ -450,7 +441,7 @@ namespace WindowsFormsApp1
                     case 2:
                         {
                             var str = new straightline();
-                            str.GetPenSet(pen_col, pen_width, fillcol, fill/*, form_width, form_height*/);
+                            str.GetPenSet(pen_col, pen_width, fillcol, fill);
 
                             str.DrawFigureCordPoint1(x0, y0);
                             str.DrawFigureCordPoint2(x1, y1);
@@ -481,7 +472,7 @@ namespace WindowsFormsApp1
 
                             aa = 1;
                             var str = new Curveline();
-                            str.GetPenSet(pen_col, pen_width, fillcol, fill/*, form_width, form_height*/);
+                            str.GetPenSet(pen_col, pen_width, fillcol, fill);
                             str.Draw(g);
                         }
                         break;
@@ -505,7 +496,7 @@ namespace WindowsFormsApp1
             f1.form2_close();
         }
 
-        Graphics g;
+       
 
         private void Form2_Load(object sender, System.EventArgs e)
         {
@@ -518,11 +509,6 @@ namespace WindowsFormsApp1
         private void Form2_Scroll(object sender, ScrollEventArgs e)
         {
             repaint();
-        }
-
-        private void Form2_KeyDown(object sender, KeyEventArgs e)
-        {
-            
         }
       
         private void textBox1_TextChanged(object sender, System.EventArgs e)
