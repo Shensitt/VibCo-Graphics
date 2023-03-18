@@ -125,10 +125,13 @@ namespace WindowsFormsApp1
                         break;
                     case 4:
                         {
-                            Text txt=new Text();
-                            txt.GetPenSet(pen_clr, pen_wid, pen_bg, IsFill/*, form_width, form_height*/);
-                            txt.GetFont(font);
-                            txt.DrawFigureCordPoint1(X0, Y0);
+                            textString = null;
+                            textBox1.Text = null;
+                            textBox1.Visible = true;
+                            textBox1.Location = new Point(X0, Y0);
+                            textBox1.Font = font;
+                            textBox1.Multiline = true;
+                            textBox1.Size = new Size(100,100);
                         }
                         break;
                 }
@@ -253,13 +256,6 @@ namespace WindowsFormsApp1
                         break;
                     case 4:
                         {
-                            Text txt = new Text();
-                            txt.GetPenSet(pen_clr, pen_wid, pen_bg, IsFill/*, form_width, form_height*/);
-                            txt.GetFont(font);
-                            txt.DrawFigureCordPoint1(X0, Y0);
-                            txt.DrawFigureCordPoint2(X1, Y1);
-                            txt.DrawDash(g);
-                           
                         }
                         break;
                 }
@@ -359,19 +355,6 @@ namespace WindowsFormsApp1
                         break;
                     case 4:
                         {
-                            Text txt = new Text();
-                            txt.GetPenSet(pen_clr, pen_wid, pen_bg, IsFill/*, form_width, form_height*/);
-                            txt.GetFont(font);
-                            txt.DrawFigureCordPoint1(X0, Y0);
-                            txt.DrawFigureCordPoint2(X1, Y1);
-
-                            textString = null;
-                            textBox1.Text = null;
-                            textBox1.Visible = true;
-                            textBox1.Location = new Point(X0, Y0);
-                            textBox1.Font = font;
-                            textBox1.Multiline = true;
-                            textBox1.Size = new Size(X1 - X0, Y1 - Y0);
                         }                                          
                         break;
                 }
@@ -399,7 +382,6 @@ namespace WindowsFormsApp1
             {
                 mas[figure_count, 10] = 0;
             }
-           // saveArr[figure_count]= textString;
             Console.WriteLine(textString);
             draw_point = null;
 
@@ -553,7 +535,6 @@ namespace WindowsFormsApp1
             textString = textBox1.Text;
             if (e.KeyCode == Keys.Enter)
             {
-               
                 saveArr[figure_count] = textString;
                 data.saveArr = saveArr;
                 textBox1.Visible = false;
