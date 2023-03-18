@@ -21,7 +21,6 @@ namespace WindowsFormsApp1
         {
             throw new NotImplementedException();
         }
-
         public override void DrawDash(Graphics g)
         {
             Pen Rect_pen = new Pen(pen_clr, font.Size);

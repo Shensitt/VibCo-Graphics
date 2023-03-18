@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
 
@@ -12,16 +13,42 @@ namespace WindowsFormsApp1
         {
             InitializeComponent();
         }
-        public static int[,] mas = new int[100, 11];//1-4 -> figure_cords;
-                                                    //5-> pen color argb;
-                                                    //6-> fill color argb;
-                                                    //7->pen width
-                                                    //8->form_heigh
-                                                    //9-form width
-                                                    //10->selected figure
-                                                    //11-fill
-                                                    //12-
+        public static int[,] mas = new int[100, 11];//0-3 -> figure_cords;
+                                                    //4-> pen color argb;
+                                                    //5-> fill color argb;
+                                                    //6->pen width
+                                                    //7->form_heigh
+                                                    //8-form width
+                                                    //9->selected figure
+                                                    //10-fill
+                                                    //11-
                                                     // public static int[][] mas = new int[100][];
+
+        public static string[] saveArr=new string[100];//новый массив для сохзранения
+         //figure cords
+         //
+         //
+         //
+         //pen color
+         //fill color
+         //pen width
+         //form height
+         //form width
+         //selected figure
+         //fill (bool
+         //text string (if figure =text
+         //
+         //
+         //
+         //
+         //
+         //
+         //
+
+
+
+
+
         public int form_h = mas[0, 7];
         public int form_w = mas[0, 8];
         

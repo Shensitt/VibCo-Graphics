@@ -1,4 +1,5 @@
-﻿using System.Drawing;
+﻿using System;
+using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
 
@@ -10,12 +11,11 @@ namespace WindowsFormsApp1
     {
         public Form2()
         {
-            //Form1 form1= ;
+       
             DoubleBuffered = true;
             InitializeComponent();
-            
+            textBox1.Visible = false;
         }
-
         bool draw_frag;
         
         int X0;
@@ -24,6 +24,10 @@ namespace WindowsFormsApp1
         public int Y1;
         public static int figure_count = 0;
         public int[,] mas = new int[100, 11];
+
+        public string[] saveArr = new string[100];//новый массив для сохзранения
+
+
         public static PointF[,] point_mas = new PointF[100, 1000];
         public static PointF[] draw_point;
         int aa = 1;
@@ -39,7 +43,7 @@ namespace WindowsFormsApp1
         public static bool IsFill;
         public static Font font=SystemFonts.DefaultFont;
         public static string textString;
-        private bool enterDetected=false;
+        
 
         PictureBox pic = new PictureBox();
 
@@ -336,7 +340,7 @@ namespace WindowsFormsApp1
                                         draw_point[x] = point_mas[figure_count, x - 1]; //aa++;
                                     }
                                 }
-                                x++;                                      
+                                x++;
                             }
 
                             var str = new Curveline();
@@ -354,40 +358,28 @@ namespace WindowsFormsApp1
                         }
                         break;
                     case 4:
-                        { 
+                        {
                             Text txt = new Text();
                             txt.GetPenSet(pen_clr, pen_wid, pen_bg, IsFill/*, form_width, form_height*/);
-                            //txt.GetFont(font);
+                            txt.GetFont(font);
                             txt.DrawFigureCordPoint1(X0, Y0);
                             txt.DrawFigureCordPoint2(X1, Y1);
-                            // txt.Draw(g);
+
                             textString = null;
-                            //font=txt.fo
-                            TextBox txt2 = new TextBox()
-                            {
-                                Parent = this,
-                                Location = new Point(X0, Y0),
-                                Size = new Size(X1 - X0, Y1 - Y0),
-                                Multiline = true,
-                                Font = font,
-                                ForeColor = Color.Black
-                            };
-                                                                      // доделать ввод текста 9 лаба
-                            //while (enterDetected == false)          // доделать ввод текста 9 лаба
-                            //{                                       // доделать ввод текста 9 лаба
-                            //    txt2.Text = textString;             // доделать ввод текста 9 лаба
-                            //    //textString=txt2.Text;             // доделать ввод текста 9 лаба
-                            //    //                                  // доделать ввод текста 9 лаба
-                            //}                                       // доделать ввод текста 9 лаба
-                            //txt2.Hide();                            // доделать ввод текста 9 лаба
-                            ////else { Thread.Sleep(1); }             // доделать ввод текста 9 лаба
-                            //enterDetected = false;                  // доделать ввод текста 9 лаба
-                            ////txt2.Dispose();                       // доделать ввод текста 9 лаба
-                        }                                             // доделать ввод текста 9 лаба
+                            textBox1.Text = null;
+                            textBox1.Visible = true;
+                            textBox1.Location = new Point(X0, Y0);
+                            textBox1.Font = font;
+                            textBox1.Multiline = true;
+                            textBox1.Size = new Size(X1 - X0, Y1 - Y0);
+                        }                                          
                         break;
                 }
             }
-            draw_frag = false;
+        
+        
+
+        draw_frag = false;
 
             mas[figure_count, 0] = X0;
             mas[figure_count, 1] = Y0;
@@ -407,12 +399,13 @@ namespace WindowsFormsApp1
             {
                 mas[figure_count, 10] = 0;
             }
-
+           // saveArr[figure_count]= textString;
+            Console.WriteLine(textString);
             draw_point = null;
 
             data.point_mas = point_mas;
-
             data.mas = mas;
+           
 
             aa = 1;
             figure_count++;
@@ -421,8 +414,8 @@ namespace WindowsFormsApp1
 
             IsChanged = true;
         }
-
-
+       
+        
         public void repaint()
         {
             g = CreateGraphics();
@@ -510,6 +503,11 @@ namespace WindowsFormsApp1
                             str.Draw(g);
                         }
                         break;
+                    case 4:
+                        {
+                            g.DrawString(saveArr[xx+1], font, Brushes.Black, new Point(x0, y0));
+                        }
+                        break;
                 }
             }
         }
@@ -542,16 +540,25 @@ namespace WindowsFormsApp1
 
         private void Form2_KeyDown(object sender, KeyEventArgs e)
         {
-            //if (e.KeyData == Keys.Enter)
-            //{
-            //    enterDetected = true;
-            //}
+            
+        }
+      
+        private void textBox1_TextChanged(object sender, System.EventArgs e)
+        {
+            textString = textBox1.Text;
+        }
 
-            //if (e.KeyCode != 0)
-            //{
-            //    textString += e.KeyCode.ToString();
-            //}
-
+        private void textBox1_KeyDown(object sender, KeyEventArgs e)
+        {
+            textString = textBox1.Text;
+            if (e.KeyCode == Keys.Enter)
+            {
+               
+                saveArr[figure_count] = textString;
+                data.saveArr = saveArr;
+                textBox1.Visible = false;
+            }
+            
         }
     }
 
