@@ -68,6 +68,8 @@ namespace WindowsFormsApp1
 
                     data.mas = (int[,])formatter.Deserialize(stream);
                     data.point_mas = (System.Drawing.PointF[,])formatter.Deserialize(stream);
+                    data.stringTextArr = (string[])formatter.Deserialize(stream);
+                    data.jsonSave = (string[])formatter.Deserialize(stream);
                     stream.Close();
                     f22.Text = openFileDialog.FileName;
 
@@ -90,6 +92,8 @@ namespace WindowsFormsApp1
             }
             Form2.figure_count = fig_cnt_chk;
             f22.mas = data.mas;
+            f22.jsonSave= data.jsonSave;
+            f22.stringTextArr = data.stringTextArr;
 
             f22.Show();
             f22.repaint();
@@ -121,6 +125,10 @@ namespace WindowsFormsApp1
                            );
                         formatter.Serialize(stream, data.mas);
                         formatter.Serialize(stream, data.point_mas);
+                        formatter.Serialize(stream, data.stringTextArr);
+                        formatter.Serialize(stream, data.jsonSave);
+
+
 
                         Text = saveFileDialog.FileName;
                     }
@@ -156,6 +164,8 @@ namespace WindowsFormsApp1
                                        );
                                     formatter.Serialize(stream, data.mas);
                                     formatter.Serialize(stream, data.point_mas);
+                                    formatter.Serialize(stream, data.stringTextArr);
+                                    formatter.Serialize(stream, data.jsonSave);
 
                                     Text = saveFileDialog.FileName;
                                 }
@@ -196,6 +206,8 @@ namespace WindowsFormsApp1
                        );
                     formatter.Serialize(stream, data.mas);
                     formatter.Serialize(stream, data.point_mas);
+                    formatter.Serialize(stream, data.stringTextArr);
+                    formatter.Serialize(stream, data.jsonSave);
                     Text = saveFileDialog.FileName;
                 }
             }));

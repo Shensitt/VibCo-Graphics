@@ -24,7 +24,9 @@ namespace WindowsFormsApp1
                                                     //11-
                                                     // public static int[][] mas = new int[100][];
 
-        public static string[] saveArr=new string[100];//новый массив для сохзранения
+        public static string[] stringTextArr=new string[100];//новый массив для сохзранения
+
+        public static string[] jsonSave=new string[100];
 
 
         public int form_h = mas[0, 7];

@@ -337,3 +337,5 @@ C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\
 C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\bin\Debug\System.Numerics.Vectors.xml
 C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
 C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\bin\Debug\Newtonsoft.Json.dll
+C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\bin\Debug\Newtonsoft.Json.xml

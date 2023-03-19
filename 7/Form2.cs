@@ -1,9 +1,9 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using Newtonsoft.Json.Linq;
+using System;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
-
-
 
 namespace WindowsFormsApp1
 {
@@ -25,8 +25,8 @@ namespace WindowsFormsApp1
         public static int figure_count = 0;
         public int[,] mas = new int[100, 11];
 
-        public string[] saveArr = new string[100];//новый массив для сохзранения
-
+        public string[] stringTextArr = new string[100];//новый массив для сохзранения
+        public string[] jsonSave = new string[100];
 
         public static PointF[,] point_mas = new PointF[100, 1000];
         public static PointF[] draw_point;
@@ -144,6 +144,7 @@ namespace WindowsFormsApp1
 
                 for (int xx = 0; xx <= figure_count; xx++)
                 {
+                    jsonSave[xx] = null;
 
                     mas[xx, 0] = 0;
                     mas[xx, 2] = 0;
@@ -358,6 +359,8 @@ namespace WindowsFormsApp1
 
         draw_frag = false;
 
+            
+
             mas[figure_count, 0] = X0;
             mas[figure_count, 1] = Y0;
             mas[figure_count, 2] = X1;
@@ -380,8 +383,29 @@ namespace WindowsFormsApp1
 
             data.point_mas = point_mas;
             data.mas = mas;
-           
 
+            var dataToSave = new { 
+            X0= X0,
+            Y0= Y0,
+            X1= X1,
+            Y1= Y1,
+            pen_wid= pen_wid,
+            pen_clr= pen_clr.ToArgb(),
+            pen_bg= pen_bg.ToArgb(),
+            form_height= form_height,
+            form_width= form_width,
+            figure_selected= figure_selected,
+            fill = mas[figure_selected,10],
+            textString=textString,
+            fontName= font.Name,
+            fontSize=font.Size,
+            fontStyle = font.Style
+            };
+           
+            string jsonData = JsonConvert.SerializeObject(dataToSave);
+            jsonSave[figure_count] = jsonData;
+            data.jsonSave= jsonSave;
+            Console.WriteLine(dataToSave);
             aa = 1;
             figure_count++;
 
@@ -478,7 +502,12 @@ namespace WindowsFormsApp1
                         break;
                     case 4:
                         {
-                            g.DrawString(saveArr[xx+1], font, Brushes.Black, new Point(x0, y0));
+                            JObject jsonObject = JObject.Parse(jsonSave[xx]);
+                            Int32 argb = Convert.ToInt32((string)jsonObject["pen_clr"]);
+                            g.DrawString(stringTextArr[xx + 1],
+                                new Font(familyName: (string)jsonObject["fontName"], emSize: (float)jsonObject["fontSize"], style: (FontStyle)Enum.Parse(typeof(FontStyle), (string)jsonObject["fontStyle"]))
+                                , new SolidBrush(Color.FromArgb(argb)),
+                                new Point(x0, y0));
                         }
                         break;
                 }
@@ -521,9 +550,35 @@ namespace WindowsFormsApp1
             textString = textBox1.Text;
             if (e.KeyCode == Keys.Enter)
             {
-                saveArr[figure_count] = textString;
-                data.saveArr = saveArr;
+                stringTextArr[figure_count] = textString;
+                data.stringTextArr = stringTextArr;
+
+                var dataToSave = new
+                {
+                    X0 = X0,
+                    Y0 = Y0,
+                    X1 = X1,
+                    Y1 = Y1,
+                    pen_wid = pen_wid,
+                    pen_clr = pen_clr.ToArgb(),
+                    pen_bg = pen_bg.ToArgb(),
+                    form_height = form_height,
+                    form_width = form_width,
+                    figure_selected = figure_selected,
+                    fill = mas[figure_selected, 10],
+                    textString = textString,
+                    fontName = font.Name,
+                    fontSize = font.Size,
+                    fontStyle = font.Style
+                };
+                string jsonData = JsonConvert.SerializeObject(dataToSave);
+                jsonSave[figure_count] = jsonData;
+
+                data.jsonSave = jsonSave;
+                Console.WriteLine(dataToSave);
+
                 textBox1.Visible = false;
+                repaint();
             }
             
         }
