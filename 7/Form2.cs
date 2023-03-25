@@ -40,16 +40,17 @@ namespace WindowsFormsApp1
         public static int pen_wid = 1;
         public static Color pen_bg = Color.White;
         public static int figure_selected;
+        public static int prev_figure_selected;
         public static bool IsFill;
         public static Font font=SystemFonts.DefaultFont;
         public static string textString;
-        
-
+        //public static bool SelectMode = false;//для выделения фигур
+        int selected_figure_number;
         PictureBox pic = new PictureBox();
 
         public void Form2_MouseDown(object sender, MouseEventArgs e)
         {
-            
+            repaint();
             g = CreateGraphics();
 
             if (e.Button == MouseButtons.Left)
@@ -60,6 +61,9 @@ namespace WindowsFormsApp1
                 Y0 = e.Y/* - AutoScrollPosition.Y*/;
                 figure_selected = Form5.figure_selected;
                 IsFill = Form5.IsFill;
+
+                
+
                 switch (figure_selected)
                 {
                     case 0:
@@ -125,13 +129,22 @@ namespace WindowsFormsApp1
                         break;
                     case 4:
                         {
-                            textString = null;
-                            textBox1.Text = null;
-                            textBox1.Visible = true;
-                            textBox1.Location = new Point(X0, Y0);
-                            textBox1.Font = font;
-                            textBox1.Multiline = true;
-                            textBox1.Size = new Size(100,100);
+                            var text = new Text();
+                            text.GetPenSet(pen_clr, pen_wid, pen_bg, IsFill/*,form_width,form_height*/);
+                            text.DrawFigureCordPoint1(X0, Y0);
+
+                        }
+                        break;
+                    case 5:
+                        {
+                            for (int figure = 0; figure < 100; figure++)
+                            {
+                                if (mas[figure, 0] <= X0 && mas[figure, 1] <= Y0 && mas[figure, 0] >= X0 && mas[figure, 0] >= X0)
+                                {
+                                    selected_figure_number = figure;
+                                    break;
+                                }
+                            }
                         }
                         break;
                 }
@@ -174,8 +187,16 @@ namespace WindowsFormsApp1
             X1 = e.X - X0/*-AutoScrollPosition.X*/;
             Y1 = e.Y - Y0/*-AutoScrollPosition.Y*/;
 
+           
+
             if (draw_frag == true)
             {
+
+                
+                
+
+                repaint();
+
                 Graphics g = CreateGraphics();
 
                 figure_selected = Form5.figure_selected;
@@ -255,6 +276,24 @@ namespace WindowsFormsApp1
                         break;
                     case 4:
                         {
+                            var text = new Text();
+                            text.GetPenSet(pen_clr, pen_wid, pen_bg, IsFill/*, form_width, form_height*/);
+                            text.DrawFigureCordPoint1(X0, Y0);
+                            text.DrawFigureCordPoint2(X1, Y1);
+
+                            text.DrawDash(g);
+                        }
+                        break;
+                    case 5:
+                        {
+                            int sizex = mas[selected_figure_number, 2] - mas[selected_figure_number, 0];
+                            int sizey = mas[selected_figure_number, 3] - mas[selected_figure_number, 1];
+
+                            mas[selected_figure_number, 0] = X1;
+                            mas[selected_figure_number, 1] = Y1;
+                            mas[selected_figure_number, 2] = X1+sizex;
+                            mas[selected_figure_number, 3] = Y1+sizey;//переделать под текущее положене изменение координать
+                            repaint();
                         }
                         break;
                 }
@@ -263,6 +302,7 @@ namespace WindowsFormsApp1
 
         public void Form2_MouseUp(object sender, MouseEventArgs e)
         {
+            repaint();
             Graphics gg = this.pic.CreateGraphics();
             pic.Width = this.Width;
             pic.Height = this.Height;
@@ -352,14 +392,37 @@ namespace WindowsFormsApp1
 
                         }
                         break;
+                    case 4:
+                        {
+                            var text = new Text();
+
+                            text.GetPenSet(pen_clr, pen_wid, pen_bg, IsFill/*, form_width, form_height*/);
+
+                            X0 += AutoScrollPosition.X;
+                            Y0 += AutoScrollPosition.Y;
+                            X1 = e.X;
+                            Y1 = e.Y;
+                            text.DrawFigureCordPoint1(X0, Y0);
+                            text.DrawFigureCordPoint2(X1, Y1);
+
+                            textString = null;
+                            textBox1.Text = null;
+                            textBox1.Visible = true;
+                            textBox1.Font = font;
+                            textBox1.Multiline = true;
+                            textBox1.Location = new Point(text.x_beg, text.y_beg);
+                            textBox1.Size = new Size(text.x_beg1 - text.x_beg, text.y_beg1 - text.y_beg);
+                            repaint();
+                        }
+                        break;
+                    case 5:
+                        {
+
+                        }break;
                 }
             }
-        
-        
 
         draw_frag = false;
-
-            
 
             mas[figure_count, 0] = X0;
             mas[figure_count, 1] = Y0;
@@ -409,6 +472,7 @@ namespace WindowsFormsApp1
             aa = 1;
             figure_count++;
 
+            repaint();
             repaint();
 
             IsChanged = true;
@@ -507,7 +571,7 @@ namespace WindowsFormsApp1
                             g.DrawString(stringTextArr[xx + 1],
                                 new Font(familyName: (string)jsonObject["fontName"], emSize: (float)jsonObject["fontSize"], style: (FontStyle)Enum.Parse(typeof(FontStyle), (string)jsonObject["fontStyle"]))
                                 , new SolidBrush(Color.FromArgb(argb)),
-                                new Point(x0, y0));
+                               new Rectangle(x0,y0,x1-x0,y1-y0)  );
                         }
                         break;
                 }
@@ -543,6 +607,7 @@ namespace WindowsFormsApp1
         private void textBox1_TextChanged(object sender, System.EventArgs e)
         {
             textString = textBox1.Text;
+            repaint();
         }
 
         private void textBox1_KeyDown(object sender, KeyEventArgs e)
@@ -576,11 +641,12 @@ namespace WindowsFormsApp1
 
                 data.jsonSave = jsonSave;
                 Console.WriteLine(dataToSave);
-
+                
                 textBox1.Visible = false;
+                textBox1.Size = new Size(0,0);
                 repaint();
             }
-            
+             repaint();
         }
     }
 

@@ -310,7 +310,21 @@ namespace WindowsFormsApp1
 
         }
 
-       
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (button1.FlatStyle == FlatStyle.Flat)
+            {
+                button1.FlatStyle = FlatStyle.Standard;
+                Form5.figure_selected = Form2.prev_figure_selected;
+            }
+            else 
+            {
+                button1.FlatStyle = FlatStyle.Flat;
+                Form2.prev_figure_selected = Form5.figure_selected;
+                Form5.figure_selected = 5;
+            }
+
+        }
     }
 }
 

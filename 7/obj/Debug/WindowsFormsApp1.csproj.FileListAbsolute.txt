@@ -339,3 +339,53 @@ C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\
 C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
 C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\bin\Debug\Newtonsoft.Json.dll
 C:\Users\shens\OneDrive\Рабочий стол\Vibco graphics\VibCo-Graphics\7\bin\Debug\Newtonsoft.Json.xml
+F:\Vibco graphics\VibCo-Graphics\7\bin\Debug\WindowsFormsApp1.exe.config
+F:\Vibco graphics\VibCo-Graphics\7\bin\Debug\WindowsFormsApp1.exe
+F:\Vibco graphics\VibCo-Graphics\7\bin\Debug\WindowsFormsApp1.pdb
+F:\Vibco graphics\VibCo-Graphics\7\bin\Debug\Newtonsoft.Json.dll
+F:\Vibco graphics\VibCo-Graphics\7\bin\Debug\System.Buffers.dll
+F:\Vibco graphics\VibCo-Graphics\7\bin\Debug\System.Memory.dll
+F:\Vibco graphics\VibCo-Graphics\7\bin\Debug\System.Numerics.Vectors.dll
+F:\Vibco graphics\VibCo-Graphics\7\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+F:\Vibco graphics\VibCo-Graphics\7\bin\Debug\Newtonsoft.Json.xml
+F:\Vibco graphics\VibCo-Graphics\7\bin\Debug\System.Buffers.xml
+F:\Vibco graphics\VibCo-Graphics\7\bin\Debug\System.Memory.xml
+F:\Vibco graphics\VibCo-Graphics\7\bin\Debug\System.Numerics.Vectors.xml
+F:\Vibco graphics\VibCo-Graphics\7\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+F:\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+F:\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.Form1.resources
+F:\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.Form2.resources
+F:\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.Form3.resources
+F:\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.Form4.resources
+F:\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.Form5.resources
+F:\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+F:\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+F:\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+F:\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
+F:\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.exe
+F:\Vibco graphics\VibCo-Graphics\7\obj\Debug\WindowsFormsApp1.pdb
+D:\0433-04\senin\7\bin\Debug\WindowsFormsApp1.exe.config
+D:\0433-04\senin\7\bin\Debug\WindowsFormsApp1.exe
+D:\0433-04\senin\7\bin\Debug\WindowsFormsApp1.pdb
+D:\0433-04\senin\7\bin\Debug\Newtonsoft.Json.dll
+D:\0433-04\senin\7\bin\Debug\System.Buffers.dll
+D:\0433-04\senin\7\bin\Debug\System.Memory.dll
+D:\0433-04\senin\7\bin\Debug\System.Numerics.Vectors.dll
+D:\0433-04\senin\7\bin\Debug\System.Runtime.CompilerServices.Unsafe.dll
+D:\0433-04\senin\7\bin\Debug\Newtonsoft.Json.xml
+D:\0433-04\senin\7\bin\Debug\System.Buffers.xml
+D:\0433-04\senin\7\bin\Debug\System.Memory.xml
+D:\0433-04\senin\7\bin\Debug\System.Numerics.Vectors.xml
+D:\0433-04\senin\7\bin\Debug\System.Runtime.CompilerServices.Unsafe.xml
+D:\0433-04\senin\7\obj\Debug\WindowsFormsApp1.csproj.AssemblyReference.cache
+D:\0433-04\senin\7\obj\Debug\WindowsFormsApp1.Form1.resources
+D:\0433-04\senin\7\obj\Debug\WindowsFormsApp1.Form2.resources
+D:\0433-04\senin\7\obj\Debug\WindowsFormsApp1.Form3.resources
+D:\0433-04\senin\7\obj\Debug\WindowsFormsApp1.Form4.resources
+D:\0433-04\senin\7\obj\Debug\WindowsFormsApp1.Form5.resources
+D:\0433-04\senin\7\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+D:\0433-04\senin\7\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+D:\0433-04\senin\7\obj\Debug\WindowsFormsApp1.csproj.CoreCompileInputs.cache
+D:\0433-04\senin\7\obj\Debug\WindowsFormsApp1.csproj.CopyComplete
+D:\0433-04\senin\7\obj\Debug\WindowsFormsApp1.exe
+D:\0433-04\senin\7\obj\Debug\WindowsFormsApp1.pdb
