@@ -62,8 +62,6 @@ namespace WindowsFormsApp1
                 figure_selected = Form5.figure_selected;
                 IsFill = Form5.IsFill;
 
-                
-
                 switch (figure_selected)
                 {
                     case 0:
@@ -141,7 +139,7 @@ namespace WindowsFormsApp1
                             {
                                 if (mas[figure, 0] <= X0 && mas[figure, 1] <= Y0 && mas[figure, 0] >= X0 && mas[figure, 0] >= X0)
                                 {
-                                    selected_figure_number = figure;
+                                    selected_figure_number = figure;//измениь тна внутренний флаг в массиве фигуры
                                     break;
                                 }
                             }
@@ -187,16 +185,9 @@ namespace WindowsFormsApp1
             X1 = e.X - X0/*-AutoScrollPosition.X*/;
             Y1 = e.Y - Y0/*-AutoScrollPosition.Y*/;
 
-           
-
             if (draw_frag == true)
             {
-
-                
-                
-
                 repaint();
-
                 Graphics g = CreateGraphics();
 
                 figure_selected = Form5.figure_selected;
@@ -236,8 +227,6 @@ namespace WindowsFormsApp1
                             Y1 = e.Y;
                             str.DrawFigureCordPoint2(X1, Y1);
                             str.DrawDash(g);
-
-
                         }
                         break;
                     case 3:
@@ -286,14 +275,13 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-                            int sizex = mas[selected_figure_number, 2] - mas[selected_figure_number, 0];
-                            int sizey = mas[selected_figure_number, 3] - mas[selected_figure_number, 1];
-
-                            mas[selected_figure_number, 0] = X1;
-                            mas[selected_figure_number, 1] = Y1;
-                            mas[selected_figure_number, 2] = X1+sizex;
-                            mas[selected_figure_number, 3] = Y1+sizey;//переделать под текущее положене изменение координать
+                           
+                            mas[(int)selected_figure_number, 0] = e.Location.X;
+                            mas[(int)selected_figure_number, 1] = e.Location.Y;
+                            mas[(int)selected_figure_number, 2] = e.Location.X+mas[(int)selected_figure_number,2]-mas[(int)selected_figure_number,0];
+                            mas[(int)selected_figure_number, 3] = e.Location.Y + mas[(int)selected_figure_number,3]-mas[(int)selected_figure_number,1];//переделать под текущее положене изменение координать
                             repaint();
+
                         }
                         break;
                 }
@@ -417,8 +405,9 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-
-                        }break;
+                            //selected_figure_number = null;
+                        }
+                        break;
                 }
             }
 
