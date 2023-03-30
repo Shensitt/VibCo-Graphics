@@ -56,6 +56,7 @@ namespace WindowsFormsApp1
             this.FormClosed += new System.Windows.Forms.FormClosedEventHandler(this.Form2_FormClosed);
             this.Load += new System.EventHandler(this.Form2_Load);
             this.Scroll += new System.Windows.Forms.ScrollEventHandler(this.Form2_Scroll);
+            this.Click += new System.EventHandler(this.Form2_Click);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form2_Paint);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseMove);

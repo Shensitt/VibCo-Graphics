@@ -1,6 +1,7 @@
 ﻿using Newtonsoft.Json;
 using Newtonsoft.Json.Linq;
 using System;
+using System.Collections.Generic;
 using System.Drawing;
 using System.Threading;
 using System.Windows.Forms;
@@ -44,7 +45,7 @@ namespace WindowsFormsApp1
         public static bool IsFill;
         public static Font font=SystemFonts.DefaultFont;
         public static string textString;
-        //public static bool SelectMode = false;//для выделения фигур
+        List<int> selected_figures;//для выделения фигур 
         int selected_figure_number;
         PictureBox pic = new PictureBox();
 
@@ -61,8 +62,6 @@ namespace WindowsFormsApp1
                 Y0 = e.Y/* - AutoScrollPosition.Y*/;
                 figure_selected = Form5.figure_selected;
                 IsFill = Form5.IsFill;
-
-                
 
                 switch (figure_selected)
                 {
@@ -137,14 +136,8 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-                            for (int figure = 0; figure < 100; figure++)
-                            {
-                                if (mas[figure, 0] <= X0 && mas[figure, 1] <= Y0 && mas[figure, 0] >= X0 && mas[figure, 0] >= X0)
-                                {
-                                    selected_figure_number = figure;
-                                    break;
-                                }
-                            }
+                            
+                            
                         }
                         break;
                 }
@@ -187,16 +180,9 @@ namespace WindowsFormsApp1
             X1 = e.X - X0/*-AutoScrollPosition.X*/;
             Y1 = e.Y - Y0/*-AutoScrollPosition.Y*/;
 
-           
-
             if (draw_frag == true)
             {
-
-                
-                
-
                 repaint();
-
                 Graphics g = CreateGraphics();
 
                 figure_selected = Form5.figure_selected;
@@ -236,8 +222,6 @@ namespace WindowsFormsApp1
                             Y1 = e.Y;
                             str.DrawFigureCordPoint2(X1, Y1);
                             str.DrawDash(g);
-
-
                         }
                         break;
                     case 3:
@@ -286,14 +270,19 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-                            int sizex = mas[selected_figure_number, 2] - mas[selected_figure_number, 0];
-                            int sizey = mas[selected_figure_number, 3] - mas[selected_figure_number, 1];
+                           
+                                mas[(int)selected_figure_number, 0] = e.Location.X;
+                                mas[(int)selected_figure_number, 1] = e.Location.Y;
+                                mas[(int)selected_figure_number, 2] = e.Location.X + mas[(int)selected_figure_number, 2] - mas[(int)selected_figure_number, 0];
+                                mas[(int)selected_figure_number, 3] = e.Location.Y + mas[(int)selected_figure_number, 3] - mas[(int)selected_figure_number, 1];//переделать под текущее положене изменение координать
 
-                            mas[selected_figure_number, 0] = X1;
-                            mas[selected_figure_number, 1] = Y1;
-                            mas[selected_figure_number, 2] = X1+sizex;
-                            mas[selected_figure_number, 3] = Y1+sizey;//переделать под текущее положене изменение координать
-                            repaint();
+                                var rect = new Rectangl();
+                                rect.DrawFigureCordPoint1(mas[(int)selected_figure_number, 0] - 5, mas[(int)selected_figure_number, 1] - 5);
+                                rect.DrawFigureCordPoint2(mas[(int)selected_figure_number, 2] + 10, mas[(int)selected_figure_number, 3] + 10);
+                                rect.GetPenSet(Color.Black, 1, Color.Black, false);
+                                rect.DrawDash(g);
+                            
+                            //repaint();
                         }
                         break;
                 }
@@ -417,8 +406,9 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-
-                        }break;
+                            //selected_figure_number = null;
+                        }
+                        break;
                 }
             }
 
@@ -647,6 +637,13 @@ namespace WindowsFormsApp1
                 repaint();
             }
              repaint();
+        }
+
+       
+
+        private void Form2_Click(object sender, EventArgs e)
+        {
+           
         }
     }
 

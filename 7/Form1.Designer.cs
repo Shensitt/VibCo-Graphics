@@ -386,7 +386,7 @@ namespace WindowsFormsApp1
         private System.Windows.Forms.ToolStripMenuItem textToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem fontToolStripMenuItem;
         public System.Windows.Forms.TextBox textBoxFont;
-        private System.Windows.Forms.Button button1;
+        public System.Windows.Forms.Button button1;
     }
 }
 
