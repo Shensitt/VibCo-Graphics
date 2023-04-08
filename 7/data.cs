@@ -1,17 +1,14 @@
 ﻿using System;
-using System.Collections.Generic;
 using System.Drawing;
-using System.Windows.Forms;
 
 
 namespace WindowsFormsApp1
 {
     [Serializable]
-    public partial class data : Form
+    public partial class data
     {
         public data()
         {
-            InitializeComponent();
         }
         public static int[,] mas = new int[100, 11];//0-3 -> figure_cords;
                                                     //4-> pen color argb;
@@ -24,14 +21,14 @@ namespace WindowsFormsApp1
                                                     //11-
                                                     // public static int[][] mas = new int[100][];
 
-        public static string[] stringTextArr=new string[100];//новый массив для сохзранения
+        public static string[] stringTextArr = new string[100];//новый массив для сохзранения
 
-        public static string[] jsonSave=new string[100];
+        public static string[] jsonSave = new string[100];
 
 
         public int form_h = mas[0, 7];
         public int form_w = mas[0, 8];
-        
+
         public static PointF[,] point_mas = new PointF[100, 1000];
     }
 }

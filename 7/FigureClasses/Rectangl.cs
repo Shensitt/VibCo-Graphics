@@ -5,7 +5,7 @@ namespace WindowsFormsApp1
 {
 
 
-    class Text: AbstractFigure
+    class Rectangl : AbstractFigure
 
     {
 
@@ -51,8 +51,12 @@ namespace WindowsFormsApp1
         }
         public override void Draw(Graphics g)
         {
-
-          
+            Pen Rect_pen = new Pen(pen_clr, pen_wid);
+            g.DrawRectangle(Rect_pen, x_beg, y_beg, x_beg1, y_beg1);
+            if (IsFill == true)
+            {
+                g.FillRectangle(brush, x_beg + 1, y_beg + 1, x_beg1 - 1, y_beg1 - 1);
+            }
         }
 
 
