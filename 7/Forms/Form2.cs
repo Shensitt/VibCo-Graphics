@@ -4,6 +4,8 @@ using System;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Xml.Linq;
+using static System.Net.Mime.MediaTypeNames;
 
 namespace WindowsFormsApp1
 {
@@ -46,7 +48,7 @@ namespace WindowsFormsApp1
         public static string textString;
 
         List<int> selected_figures;//для выделения фигур 
-        int selected_figure_number;
+        static int selected_figure_number;
         public static bool IsSelectMode=false;
        //private static bool IsMouseMoving = false;
 
@@ -139,11 +141,10 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-                            
-                               
-                            
+                            var rect = new Rectangl();
+                            rect.GetPenSet(Color.Black, 1, Color.Black, false);
+                            rect.DrawFigureCordPoint1(X0, Y0);
                         }
-                        
                         break;
                 }
             }
@@ -264,7 +265,11 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-
+                            var rect = new Rectangl();
+                            rect.GetPenSet(Color.Black, 1, Color.Black, false);
+                            rect.DrawFigureCordPoint1(X0, Y0);
+                            rect.DrawFigureCordPoint2(X1, Y1);
+                            rect.DrawDash(g);
                         }
                         break;
                 }
@@ -376,12 +381,31 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-                            //if (IsSelectMode)  //кнопка выделения нажата
-                            //{
-                            //    int x = MousePosition.X;
-                            //    int y = MousePosition.Y;
-                            //    Console.WriteLine(x.ToString(), y.ToString());
-                            //}
+                            var rect = new Rectangl();
+                            rect.GetPenSet(Color.Black, 1, Color.Black, false);                                  //do figure drawdash is repaint
+                                                                                                                 //do figure drawdash is repaint
+                            for (int x = 99; x >=0; x--)                                                         //do figure drawdash is repaint
+                            {                                                                                    //do figure drawdash is repaint
+                                int fig_num = mas[x, 9];                                                         //do figure drawdash is repaint
+                                if (mas[x, 0] > 0 &&                                                             //do figure drawdash is repaint
+                                    mas[x, 1] > 0 &&                                                             //do figure drawdash is repaint
+                                    mas[x, 2] > 0 &&                                                             //do figure drawdash is repaint
+                                    mas[x, 3] > 0)                                                               //do figure drawdash is repaint
+                                {                                                                                //do figure drawdash is repaint
+                                    if (mas[x, 0] <= X0 && mas[x, 1] <= Y0 && mas[x, 2] >= X1 && mas[x, 3] >= Y1)//do figure drawdash is repaint
+                                    {                                                                            //do figure drawdash is repaint
+                                        selected_figure_number = fig_num;                                        //do figure drawdash is repaint
+                                        Console.WriteLine(fig_num);                                              //do figure drawdash is repaint
+                                        break;                                                                   //do figure drawdash is repaint
+                                    }                                                                            //do figure drawdash is repaint
+                                }                                                                                //do figure drawdash is repaint
+                                                                                                                 //do figure drawdash is repaint
+                            }                                                                                    //do figure drawdash is repaint
+
+                            rect.DrawFigureCordPoint1(mas[selected_figure_number,0], mas[selected_figure_number, 1] );
+                            rect.DrawFigureCordPoint2(mas[selected_figure_number, 2] , mas[selected_figure_number, 3] );
+                            rect.Hide(g);
+                            rect.DrawDash(g);
                         }
                         break;
                 }
@@ -436,7 +460,7 @@ namespace WindowsFormsApp1
             aa = 1;
             figure_count++;
 
-            repaint();
+            //repaint();
             IsChanged = true;
         }
 
@@ -525,10 +549,12 @@ namespace WindowsFormsApp1
                         {
                             JObject jsonObject = JObject.Parse(jsonSave[xx]);
                             Int32 argb = Convert.ToInt32((string)jsonObject["pen_clr"]);
-                            g.DrawString(stringTextArr[xx + 1],
-                                new Font(familyName: (string)jsonObject["fontName"], emSize: (float)jsonObject["fontSize"], style: (FontStyle)Enum.Parse(typeof(FontStyle), (string)jsonObject["fontStyle"]))
-                                , new SolidBrush(Color.FromArgb(argb)),
-                               new Rectangle(x0, y0, x1 - x0, y1 - y0));
+                            g.DrawString(
+                                stringTextArr[xx + 1],
+                                new Font(familyName: (string)jsonObject["fontName"], emSize: (float)jsonObject["fontSize"], style: (FontStyle)Enum.Parse(typeof(FontStyle), (string)jsonObject["fontStyle"])), 
+                                new SolidBrush(Color.FromArgb(argb)),
+                                new Rectangle(x0, y0, x1 - x0, y1 - y0)
+                            );
                         }
                         break;
                 }
@@ -611,12 +637,12 @@ namespace WindowsFormsApp1
 
         private void Form2_MouseClick(object sender, MouseEventArgs e)
         {
-            if (IsSelectMode)  //кнопка выделения нажата
-            {
-                int x = MousePosition.X;
-                int y = MousePosition.Y;
-                Console.WriteLine(x.ToString(), y.ToString());
-            }
+            //if (IsSelectMode)  //кнопка выделения нажата
+            //{
+            //    int x = MousePosition.X;
+            //    int y = MousePosition.Y;
+            //    Console.WriteLine(x.ToString(), y.ToString());
+            //}
         }
     }
 }
