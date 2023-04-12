@@ -323,7 +323,8 @@ namespace WindowsFormsApp1
                 Form2.prev_figure_selected = Form5.figure_selected;
                 Form5.figure_selected = 5;
                 Form2.IsSelectMode = false;
-               // Form2.selected_figure_number = null;
+                // Form2.selected_figure_number = null;
+                
             }
 
         }
