@@ -3,9 +3,8 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Linq;
 using System.Windows.Forms;
-using System.Xml.Linq;
-using static System.Net.Mime.MediaTypeNames;
 
 namespace WindowsFormsApp1
 {
@@ -13,7 +12,6 @@ namespace WindowsFormsApp1
     {
         public Form2()
         {
-
             DoubleBuffered = true;
             InitializeComponent();
             textBox1.Visible = false;
@@ -49,8 +47,8 @@ namespace WindowsFormsApp1
 
         List<int> selected_figures;//для выделения фигур 
         public static int selected_figure_number;
-        public static bool IsSelectMode=false;
-       //private static bool IsMouseMoving = false;
+        public static bool IsSelectMode = false;
+        private static bool IsSecondarySelectPull = false;
 
         PictureBox pic = new PictureBox();
 
@@ -141,9 +139,16 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-                            var rect = new Rectangl();
-                            rect.GetPenSet(Color.Black, 1, Color.Black, false);
-                            rect.DrawFigureCordPoint1(X0, Y0);
+                            if (!IsSecondarySelectPull)
+                            {
+                                var rect = new Rectangl();
+                                rect.GetPenSet(Color.Black, 1, Color.Black, false);
+                                rect.DrawFigureCordPoint1(X0, Y0);
+                            }
+                            else
+                            {
+                                
+                            }
                         }
                         break;
                 }
@@ -185,7 +190,7 @@ namespace WindowsFormsApp1
 
             X1 = e.X - X0;
             Y1 = e.Y - Y0;
-            
+
 
             if (draw_frag == true)
             {
@@ -265,16 +270,22 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-                            var rect = new Rectangl();
-                            rect.GetPenSet(Color.Black, 1, Color.Black, false);
-                            rect.DrawFigureCordPoint1(X0, Y0);
-                            rect.DrawFigureCordPoint2(X1, Y1);
-                            rect.DrawDash(g);
+                            if (!IsSecondarySelectPull)
+                            {
+                                var rect = new Rectangl();
+                                rect.GetPenSet(Color.Black, 1, Color.Black, false);
+                                rect.DrawFigureCordPoint1(X0, Y0);
+                                rect.DrawFigureCordPoint2(X1, Y1);
+                                rect.DrawDash(g);
+                            }
+                            else
+                            {
+
+                            }
                         }
                         break;
                 }
             }
-           // IsMouseMoving = false;
         }
 
         public void Form2_MouseUp(object sender, MouseEventArgs e)
@@ -382,31 +393,30 @@ namespace WindowsFormsApp1
                     case 5:
                         {
                             var rect = new Rectangl();
-                            rect.GetPenSet(Color.Black, 1, Color.Black, false);                                  
-                                                                                                                 
+                            rect.GetPenSet(Color.Black, 1, Color.Black, false);
+
                             for (int x = 5; x >=0; x--)                                                         
-                            {                                                                                    
-                                //int fig_num = mas[x, 9];                                                         
-                                if (mas[x, 0] > 0 &&                                                             
-                                    mas[x, 1] > 0 &&                                                             
-                                    mas[x, 2] > 0 &&                                                             
-                                    mas[x, 3] > 0)                                                               
-                                {                                                                                
+                            {
+                                if (mas[x, 0] > 0 &&
+                                    mas[x, 1] > 0 &&
+                                    mas[x, 2] > 0 &&
+                                    mas[x, 3] > 0)
+                                {
                                     if (mas[x, 0] <= X0 && mas[x, 1] <= Y0 && mas[x, 2]+mas[x,0] >= X0 && mas[x, 3] + mas[x, 1] >= Y0)
                                     {                                                                            
                                         selected_figure_number = x;                                        
-                                        Console.WriteLine(x);                                              
-                                        break;                                                                   
-                                    }                                                                            
-                                }                                                                                
-                                                                                                                 
-                            }                                                                                    
+                                        Console.WriteLine(x);
+                                        break;
+                                    }
+                                }
 
+                            }
+                            //todo bools как мышь кликнула, сделать допуск смещения на несколько пикселей при клике, второй вариант когда мышь ведется, тогдла выделяется несколько фигру
                             rect.DrawFigureCordPoint1(mas[(int)selected_figure_number,0], mas[(int)selected_figure_number, 1] );
                             rect.DrawFigureCordPoint2(mas[(int)selected_figure_number, 2] , mas[(int)selected_figure_number, 3] );
-                            rect.Hide(g);
-                            rect.DrawDash(g);
-                        }
+                                rect.Hide(g);
+                                rect.DrawDash(g);
+                            }
                         break;
                 }
             }
@@ -551,7 +561,7 @@ namespace WindowsFormsApp1
                             Int32 argb = Convert.ToInt32((string)jsonObject["pen_clr"]);
                             g.DrawString(
                                 stringTextArr[xx + 1],
-                                new Font(familyName: (string)jsonObject["fontName"], emSize: (float)jsonObject["fontSize"], style: (FontStyle)Enum.Parse(typeof(FontStyle), (string)jsonObject["fontStyle"])), 
+                                new Font(familyName: (string)jsonObject["fontName"], emSize: (float)jsonObject["fontSize"], style: (FontStyle)Enum.Parse(typeof(FontStyle), (string)jsonObject["fontStyle"])),
                                 new SolidBrush(Color.FromArgb(argb)),
                                 new Rectangle(x0, y0, x1 - x0, y1 - y0)
                             );
@@ -572,7 +582,7 @@ namespace WindowsFormsApp1
             f1.form2_close();
         }
 
-        private void Form2_Load(object sender, System.EventArgs e)
+        private void Form2_Load(object sender, EventArgs e)
         {
             form_height = this.Height;
             form_width = this.Width;
@@ -632,7 +642,7 @@ namespace WindowsFormsApp1
 
         private void Form2_Click(object sender, EventArgs e)
         {
-           
+
         }
 
         private void Form2_MouseClick(object sender, MouseEventArgs e)
