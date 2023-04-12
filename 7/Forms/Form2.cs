@@ -48,7 +48,7 @@ namespace WindowsFormsApp1
         public static string textString;
 
         List<int> selected_figures;//для выделения фигур 
-        static int selected_figure_number;
+        public static int selected_figure_number;
         public static bool IsSelectMode=false;
        //private static bool IsMouseMoving = false;
 
@@ -382,28 +382,28 @@ namespace WindowsFormsApp1
                     case 5:
                         {
                             var rect = new Rectangl();
-                            rect.GetPenSet(Color.Black, 1, Color.Black, false);                                  //do figure drawdash is repaint
-                                                                                                                 //do figure drawdash is repaint
-                            for (int x = 99; x >=0; x--)                                                         //do figure drawdash is repaint
-                            {                                                                                    //do figure drawdash is repaint
-                                int fig_num = mas[x, 9];                                                         //do figure drawdash is repaint
-                                if (mas[x, 0] > 0 &&                                                             //do figure drawdash is repaint
-                                    mas[x, 1] > 0 &&                                                             //do figure drawdash is repaint
-                                    mas[x, 2] > 0 &&                                                             //do figure drawdash is repaint
-                                    mas[x, 3] > 0)                                                               //do figure drawdash is repaint
-                                {                                                                                //do figure drawdash is repaint
-                                    if (mas[x, 0] <= X0 && mas[x, 1] <= Y0 && mas[x, 2] >= X1 && mas[x, 3] >= Y1)//do figure drawdash is repaint
-                                    {                                                                            //do figure drawdash is repaint
-                                        selected_figure_number = fig_num;                                        //do figure drawdash is repaint
-                                        Console.WriteLine(fig_num);                                              //do figure drawdash is repaint
-                                        break;                                                                   //do figure drawdash is repaint
-                                    }                                                                            //do figure drawdash is repaint
-                                }                                                                                //do figure drawdash is repaint
-                                                                                                                 //do figure drawdash is repaint
-                            }                                                                                    //do figure drawdash is repaint
+                            rect.GetPenSet(Color.Black, 1, Color.Black, false);                                  
+                                                                                                                 
+                            for (int x = 5; x >=0; x--)                                                         
+                            {                                                                                    
+                                //int fig_num = mas[x, 9];                                                         
+                                if (mas[x, 0] > 0 &&                                                             
+                                    mas[x, 1] > 0 &&                                                             
+                                    mas[x, 2] > 0 &&                                                             
+                                    mas[x, 3] > 0)                                                               
+                                {                                                                                
+                                    if (mas[x, 0] <= X0 && mas[x, 1] <= Y0 && mas[x, 2]+mas[x,0] >= X0 && mas[x, 3] + mas[x, 1] >= Y0)
+                                    {                                                                            
+                                        selected_figure_number = x;                                        
+                                        Console.WriteLine(x);                                              
+                                        break;                                                                   
+                                    }                                                                            
+                                }                                                                                
+                                                                                                                 
+                            }                                                                                    
 
-                            rect.DrawFigureCordPoint1(mas[selected_figure_number,0], mas[selected_figure_number, 1] );
-                            rect.DrawFigureCordPoint2(mas[selected_figure_number, 2] , mas[selected_figure_number, 3] );
+                            rect.DrawFigureCordPoint1(mas[(int)selected_figure_number,0], mas[(int)selected_figure_number, 1] );
+                            rect.DrawFigureCordPoint2(mas[(int)selected_figure_number, 2] , mas[(int)selected_figure_number, 3] );
                             rect.Hide(g);
                             rect.DrawDash(g);
                         }
