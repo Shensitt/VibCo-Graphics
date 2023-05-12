@@ -45,7 +45,7 @@ namespace WindowsFormsApp1
         public static Font font = SystemFonts.DefaultFont;
         public static string textString;
 
-        List<int> selected_figures;//для выделения фигур 
+        public  List<int> selected_figures=new List<int>();//для выделения фигур  //перенести его в класс дата и сохранять\обнулять
         public static int selected_figure_number;
         public static bool IsSelectMode = false;
         private static bool IsSecondarySelectPull = false;
@@ -139,16 +139,28 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-                            if (!IsSecondarySelectPull)
-                            {
-                                var rect = new Rectangl();
-                                rect.GetPenSet(Color.Black, 1, Color.Black, false);
-                                rect.DrawFigureCordPoint1(X0, Y0);
-                            }
-                            else
-                            {
-                                
-                            }
+                            //var rect = new Rectangle(e.X, e.Y, 0, 0);
+                            //for (int x = 90; x >= 0; x--)//figures change
+                            //{
+                            //    foreach (var already_selected in selected_figures)
+                            //    {
+                            //        if (already_selected == x)
+                            //        {
+                            //            goto A;
+                            //        }
+                            //    }
+                            //    var rectangle = new System.Drawing.Rectangle(mas[x, 0], mas[x, 1], mas[x, 2], mas[x, 3]);
+                            //    if (rect.IntersectsWith(rectangle))
+                            //    {
+                            //        selected_figures.Add(x);
+                            //        Console.WriteLine(rectangle.ToString());
+                            //        var recti = new Rectangl();
+                            //        recti.DrawFigureCordPoint1(mas[x, 0], mas[x, 1]);
+                            //        recti.DrawFigureCordPoint2(mas[x, 2], mas[x, 3]);
+                            //        recti.DrawDash(g);
+                            //    }
+                            //    A:;
+                            //}
                         }
                         break;
                 }
@@ -183,6 +195,7 @@ namespace WindowsFormsApp1
         private void Form2_MouseMove(object sender, MouseEventArgs e)
         {
             //IsMouseMoving = true;
+          //  selected_figures = null;
             Graphics gg = this.pic.CreateGraphics();
             pic.Width = this.Width;
             pic.Height = this.Height;
@@ -194,7 +207,7 @@ namespace WindowsFormsApp1
 
             if (draw_frag == true)
             {
-                repaint();
+                repaint(); //selected_figures = null;
                 Graphics g = CreateGraphics();
 
                 figure_selected = Form5.figure_selected;
@@ -270,18 +283,14 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-                            if (!IsSecondarySelectPull)
-                            {
-                                var rect = new Rectangl();
-                                rect.GetPenSet(Color.Black, 1, Color.Black, false);
-                                rect.DrawFigureCordPoint1(X0, Y0);
-                                rect.DrawFigureCordPoint2(X1, Y1);
-                                rect.DrawDash(g);
-                            }
-                            else
-                            {
-
-                            }
+                            selected_figures.Clear();
+                            var rect = new Rectangl();
+                            rect.GetPenSet(Color.Black, 1, Color.Black, false);
+                            rect.DrawFigureCordPoint1(X0, Y0);
+                            rect.DrawFigureCordPoint2(X1, Y1);
+                            rect.DrawDash(g);
+                            //var rect = new System.Drawing.Rectangle(X0,Y0,X1,Y1);
+                            
                         }
                         break;
                 }
@@ -314,6 +323,7 @@ namespace WindowsFormsApp1
                             rect.DrawFigureCordPoint1(X0, Y0);
                             rect.DrawFigureCordPoint2(X1, Y1);
                             rect.Draw(g);
+                           // selected_figures = null;
                         }
                         break;
                     case 1:
@@ -323,6 +333,8 @@ namespace WindowsFormsApp1
                             eli.DrawFigureCordPoint1(X0, Y0);
                             eli.DrawFigureCordPoint2(X1, Y1);
                             eli.Draw(g);
+                            //selected_figures = null;
+
                         }
                         break;
                     case 2:
@@ -332,6 +344,8 @@ namespace WindowsFormsApp1
                             str.DrawFigureCordPoint1(X0, Y0);
                             str.DrawFigureCordPoint2(X1, Y1);
                             str.Draw(g);
+                        //    selected_figures = null;
+
                         }
                         break;
                     case 3:
@@ -366,6 +380,8 @@ namespace WindowsFormsApp1
                             {
                                 point_mas[figure_count, xe] = draw_point[xe];
                             }
+                          ///  selected_figures = null;
+
                         }
                         break;
                     case 4:
@@ -392,84 +408,101 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
+                            
                             var rect = new Rectangl();
                             rect.GetPenSet(Color.Gray, 1, Color.Black, false);
+                            rect.DrawFigureCordPoint1(X0,Y0);
+                            rect.DrawFigureCordPoint2(X1,Y1);
+                           // rect.DrawDash(g);
 
-                            for (int x = 5; x >=0; x--)                                                         
+                            var rectint=new System.Drawing.Rectangle(X0,Y0,e.X-X0,e.Y-Y0);
+
+                            for (int x = 90; x >= 0; x--)//figures change
                             {
-                                if (mas[x, 0] > 0 &&
-                                    mas[x, 1] > 0 &&
-                                    mas[x, 2] > 0 &&
-                                    mas[x, 3] > 0)
+                                //foreach (var already_selected in selected_figures)
+                                //{
+                                //    if (x == already_selected)
+                                //    {
+                                //        goto A;
+                                //    }
+                                //}
+                                var rectangle=new System.Drawing.Rectangle(mas[x, 0], mas[x, 1], mas[x, 2], mas[x,3]);
+                                if (rectint.IntersectsWith(rectangle))
                                 {
-                                    if (mas[x, 0] <= X0 && mas[x, 1] <= Y0 && mas[x, 2]+mas[x,0] >= X0 && mas[x, 3] + mas[x, 1] >= Y0)
-                                    {                                                                            
-                                        selected_figure_number = x;                                        
-                                        Console.WriteLine(x);
-                                        break;
-                                    }
-                                }
+                                    selected_figures.Add(x);
+                                    if (selected_figures != null)
+                                    {
+                                        foreach (var s in selected_figures)
+                                        {
+                                            Console.WriteLine(s.ToString());
 
+                                        }
+                                    }
+                                    Console.WriteLine("\n");
+
+                                    rect.DrawFigureCordPoint1(mas[x, 0], mas[x, 1]);
+                                    rect.DrawFigureCordPoint2(mas[x, 2], mas[x, 3]);
+                                    rect.DrawDash(g);
+                                }
+                           // A:;
                             }
-                            //todo bools как мышь кликнула, сделать допуск смещения на несколько пикселей при клике, второй вариант когда мышь ведется, тогдла выделяется несколько фигру
-                            rect.DrawFigureCordPoint1(mas[(int)selected_figure_number,0], mas[(int)selected_figure_number, 1] );
-                            rect.DrawFigureCordPoint2(mas[(int)selected_figure_number, 2] , mas[(int)selected_figure_number, 3] );
-                            //rect.Hide(g);
-                            rect.DrawDash(g);
-                            }
+                       // rect.Hide(g);
+                        }
                         break;
                 }
             }
             draw_frag = false;
 
-            mas[figure_count, 0] = X0;
-            mas[figure_count, 1] = Y0;
-            mas[figure_count, 2] = X1;
-            mas[figure_count, 3] = Y1;
-            mas[figure_count, 6] = pen_wid;
-            mas[figure_count, 4] = pen_clr.ToArgb();
-            mas[figure_count, 5] = pen_bg.ToArgb();
-            mas[figure_count, 7] = form_height;
-            mas[figure_count, 8] = form_width;
-            mas[figure_count, 9] = figure_selected;
-            if (IsFill == true)
+            if (figure_selected != 5)
             {
-                mas[figure_count, 10] = 1;
+                mas[figure_count, 0] = X0;
+                mas[figure_count, 1] = Y0;
+                mas[figure_count, 2] = X1;
+                mas[figure_count, 3] = Y1;
+                mas[figure_count, 6] = pen_wid;
+                mas[figure_count, 4] = pen_clr.ToArgb();
+                mas[figure_count, 5] = pen_bg.ToArgb();
+                mas[figure_count, 7] = form_height;
+                mas[figure_count, 8] = form_width;
+                mas[figure_count, 9] = figure_selected;
+                if (IsFill == true)
+                {
+                    mas[figure_count, 10] = 1;
+                }
+                else
+                {
+                    mas[figure_count, 10] = 0;
+                }
+                draw_point = null;
+                data.point_mas = point_mas;
+                data.mas = mas;
+
+                var dataToSave = new
+                {
+                    X0 = X0,
+                    Y0 = Y0,
+                    X1 = X1,
+                    Y1 = Y1,
+                    pen_wid = pen_wid,
+                    pen_clr = pen_clr.ToArgb(),
+                    pen_bg = pen_bg.ToArgb(),
+                    form_height = form_height,
+                    form_width = form_width,
+                    figure_selected = figure_selected,
+                    fill = mas[figure_selected, 10],
+                    textString = textString,
+                    fontName = font.Name,
+                    fontSize = font.Size,
+                    fontStyle = font.Style
+                };
+
+                string jsonData = JsonConvert.SerializeObject(dataToSave);
+                jsonSave[figure_count] = jsonData;
+                data.jsonSave = jsonSave;
+                // Console.WriteLine(dataToSave);
+                aa = 1;
+                figure_count++;
             }
-            else
-            {
-                mas[figure_count, 10] = 0;
-            }
-            draw_point = null;
-            data.point_mas = point_mas;
-            data.mas = mas;
-
-            var dataToSave = new
-            {
-                X0 = X0,
-                Y0 = Y0,
-                X1 = X1,
-                Y1 = Y1,
-                pen_wid = pen_wid,
-                pen_clr = pen_clr.ToArgb(),
-                pen_bg = pen_bg.ToArgb(),
-                form_height = form_height,
-                form_width = form_width,
-                figure_selected = figure_selected,
-                fill = mas[figure_selected, 10],
-                textString = textString,
-                fontName = font.Name,
-                fontSize = font.Size,
-                fontStyle = font.Style
-            };
-
-            string jsonData = JsonConvert.SerializeObject(dataToSave);
-            jsonSave[figure_count] = jsonData;
-            data.jsonSave = jsonSave;
-            Console.WriteLine(dataToSave);
-            aa = 1;
-            figure_count++;
-
             //repaint();
             IsChanged = true;
         }
@@ -480,7 +513,7 @@ namespace WindowsFormsApp1
             g = CreateGraphics();
             var rect = new Rectangl();
             rect.Hide(g);
-
+            g.Clear(Color.White);
             for (int xx = 0; xx <= figure_count; xx++)
             {
                 int x0 = mas[xx, 0] + AutoScrollPosition.X;
@@ -508,6 +541,14 @@ namespace WindowsFormsApp1
                             rect.DrawFigureCordPoint1(x0, y0);
                             rect.DrawFigureCordPoint2(x1, y1);
                             rect.Draw(g);
+                            if(selected_figures!=null)
+                            foreach(var selected in selected_figures)
+                            {
+                                if (selected == xx)
+                                {
+                                    rect.DrawDash(g);
+                                }
+                            }
                         }
                         break;
                     case 1:
@@ -517,6 +558,15 @@ namespace WindowsFormsApp1
                             eli.DrawFigureCordPoint1(x0, y0);
                             eli.DrawFigureCordPoint2(x1, y1);
                             eli.Draw(g);
+                            if (selected_figures != null)
+
+                                foreach (var selected in selected_figures)
+                            {
+                                if (selected == xx)
+                                {
+                                    eli.DrawDash(g);
+                                }
+                            }
                         }
                         break;
                     case 2:
@@ -526,6 +576,15 @@ namespace WindowsFormsApp1
                             str.DrawFigureCordPoint1(x0, y0);
                             str.DrawFigureCordPoint2(x1, y1);
                             str.Draw(g);
+                            if (selected_figures != null)
+
+                                foreach (var selected in selected_figures)
+                            {
+                                if (selected == xx)
+                                {
+                                    str.DrawDash(g);
+                                }
+                            }
                         }
                         break;
                     case 3:
@@ -553,6 +612,15 @@ namespace WindowsFormsApp1
                             var str = new Curveline();
                             str.GetPenSet(pen_col, pen_width, fillcol, fill);
                             str.Draw(g);
+                            if (selected_figures != null)
+
+                                foreach (var selected in selected_figures)
+                            {
+                                if (selected == xx)
+                                {
+                                    str.DrawDash(g);
+                                }
+                            }
                         }
                         break;
                     case 4:
@@ -565,6 +633,19 @@ namespace WindowsFormsApp1
                                 new SolidBrush(Color.FromArgb(argb)),
                                 new Rectangle(x0, y0, x1 - x0, y1 - y0)
                             );
+                            if (selected_figures != null)
+
+                                foreach (var selected in selected_figures)
+                            {
+                                if (selected == xx)
+                                {
+                                    var r = new Rectangl();
+                                    r.DrawFigureCordPoint1(x0, y0);
+                                    r.DrawFigureCordPoint2(x1 - x0, y1 - y0);
+                                    r.DrawDash(g);
+
+                                }
+                            }
                         }
                         break;
                 }
@@ -631,7 +712,7 @@ namespace WindowsFormsApp1
                 jsonSave[figure_count] = jsonData;
 
                 data.jsonSave = jsonSave;
-                Console.WriteLine(dataToSave);
+                //Console.WriteLine(dataToSave);
 
                 textBox1.Visible = false;
                 textBox1.Size = new Size(0, 0);
@@ -647,12 +728,7 @@ namespace WindowsFormsApp1
 
         private void Form2_MouseClick(object sender, MouseEventArgs e)
         {
-            //if (IsSelectMode)  //кнопка выделения нажата
-            //{
-            //    int x = MousePosition.X;
-            //    int y = MousePosition.Y;
-            //    Console.WriteLine(x.ToString(), y.ToString());
-            //}
+            
         }
     }
 }
