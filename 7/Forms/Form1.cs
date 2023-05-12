@@ -90,7 +90,7 @@ namespace WindowsFormsApp1
                 }
             }
             Form2.figure_count = fig_cnt_chk;
-            f22.mas = data.mas;
+            Form2.mas = data.mas;
             f22.jsonSave = data.jsonSave;
             f22.stringTextArr = data.stringTextArr;
 
@@ -316,6 +316,7 @@ namespace WindowsFormsApp1
                 button1.FlatStyle = FlatStyle.Standard;
                 Form5.figure_selected = Form2.prev_figure_selected;
                 Form2.IsSelectMode = true;
+                button2.Enabled = false;
             }
             else
             {
@@ -323,10 +324,36 @@ namespace WindowsFormsApp1
                 Form2.prev_figure_selected = Form5.figure_selected;
                 Form5.figure_selected = 5;
                 Form2.IsSelectMode = false;
+                button2.Enabled = true;
                 
                 // Form2.selected_figure_number = null;
                 
             }
+
+        }
+
+        private void button2_Click(object sender, EventArgs e)
+        {
+            foreach (var s in Form2.selected_figures)
+            {
+                 Form2.mas[s, 0] = 0;
+                 Form2.mas[s, 2] = 0;
+                 Form2.mas[s, 1] = 0;
+                 Form2.mas[s, 3] = 0;
+                 Form2.mas[s, 4] = 0;
+                 Form2.mas[s, 5] = 0;
+                 Form2.mas[s, 6] = 0;
+                 Form2.mas[s, 7] = 0;
+                 Form2.mas[s, 8] = 0;
+                 Form2.mas[s, 9] = 0;
+                 Form2.mas[s, 10] = 0;
+            }
+            Form2.selected_figures.Clear();
+            
+        }
+
+        private void fileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
 
         }
     }
