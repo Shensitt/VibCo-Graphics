@@ -48,6 +48,7 @@ namespace WindowsFormsApp1
         public static List<int> selected_figures=new List<int>();//для выделения фигур  //перенести его в класс дата и сохранять\обнулять
         public static int selected_figure_number;
         public static bool IsSelectMode = false;
+        static bool moveSelected = false;
         Rectangle Selected_rect=new Rectangle();//прямоугольник выделения
 
         PictureBox pic = new PictureBox();
@@ -139,6 +140,16 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
+                            Rectangle r = new Rectangle(e.X, e.Y, 0, 0);
+                            moveSelected = false;
+                            foreach (var s in selected_figures)
+                            {
+                                Rectangle re = new Rectangle(mas[s, 0], mas[s, 1], mas[s, 2], mas[s, 3]);
+                                if (r.IntersectsWith(re))
+                                {
+                                    moveSelected=true;
+                                }
+                            }
                             
                         }
                         break;
@@ -173,8 +184,6 @@ namespace WindowsFormsApp1
 
         private void Form2_MouseMove(object sender, MouseEventArgs e)
         {
-            //IsMouseMoving = true;
-          //  selected_figures = null;
             Graphics gg = this.pic.CreateGraphics();
             pic.Width = this.Width;
             pic.Height = this.Height;
@@ -262,12 +271,27 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-                            selected_figures.Clear();//? неудачное место мб
-                            var rect = new Rectangl();
-                            rect.GetPenSet(Color.Black, 1, Color.Black, false);
-                            rect.DrawFigureCordPoint1(X0, Y0);
-                            rect.DrawFigureCordPoint2(X1, Y1);
-                            rect.DrawDash(g);
+                            if (moveSelected)
+                            {
+                               //перемещать фигуры внутри прямоугольника выделения, в итоге будет двиа\гаться один прямоугольник а не все-> упрощение, нет проблем
+                                foreach (var s in selected_figures)
+                                {
+                                    mas[s, 0] =  e.X;
+                                    mas[s, 1] = e.Y;
+                                    // mas[s, 2]
+                                    // mas[s, 3]
+                                }
+
+                            }
+                            else { 
+                                 selected_figures.Clear();//? неудачное место мб
+                                var rect = new Rectangl();
+                                rect.GetPenSet(Color.Black, 1, Color.Black, false);
+                                rect.DrawFigureCordPoint1(X0, Y0);
+                                rect.DrawFigureCordPoint2(X1, Y1);
+                                rect.DrawDash(g);
+                            }
+                           
                             
                         }
                         break;
@@ -386,37 +410,41 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-                            
-                            var rect = new Rectangl();
-                            rect.GetPenSet(Color.Gray, 1, Color.Black, false);
-                            rect.DrawFigureCordPoint1(X0,Y0);
-                            rect.DrawFigureCordPoint2(X1,Y1);
-                            // rect.DrawDash(g);
-                            Selected_rect = new Rectangle(X0, Y0, e.X - X0, e.Y - Y0);
-                            var rectint=new System.Drawing.Rectangle(X0,Y0,e.X-X0,e.Y-Y0);
-
-                            for (int x = 90; x >= 0; x--)//figures change
+                            if (!moveSelected)
                             {
-                              
-                                var rectangle=new System.Drawing.Rectangle(mas[x, 0], mas[x, 1], mas[x, 2], mas[x,3]);
-                                if (rectint.IntersectsWith(rectangle))
-                                {
-                                    selected_figures.Add(x);
-                                    if (selected_figures != null)                     //log
-                                    {                                                 //log
-                                        foreach (var s in selected_figures)           //log
-                                        {                                             //log
-                                            Console.WriteLine(s.ToString());          //log
-                                                                                      //log
-                                        }                                             //log
-                                    }                                                 //log
-                                    Console.WriteLine("\n");                          //log
+                                    var rect = new Rectangl();
+                                rect.GetPenSet(Color.Gray, 1, Color.Black, false);
+                                rect.DrawFigureCordPoint1(X0,Y0);
+                                rect.DrawFigureCordPoint2(X1,Y1);
+                                // rect.DrawDash(g);
+                                Selected_rect = new Rectangle(X0, Y0, e.X - X0, e.Y - Y0);
+                                var rectint=new System.Drawing.Rectangle(X0,Y0,e.X-X0,e.Y-Y0);
 
-                                    rect.DrawFigureCordPoint1(mas[x, 0], mas[x, 1]);
-                                    rect.DrawFigureCordPoint2(mas[x, 2], mas[x, 3]);
-                                    rect.DrawDash(g);
+                                for (int x = 90; x >= 0; x--)//figures change
+                                {
+                              
+                                    var rectangle=new System.Drawing.Rectangle(mas[x, 0], mas[x, 1], mas[x, 2], mas[x,3]);
+                                    if (rectint.IntersectsWith(rectangle))
+                                    {
+                                        selected_figures.Add(x);
+                                        if (selected_figures != null)                     //log
+                                        {                                                 //log
+                                            foreach (var s in selected_figures)           //log
+                                            {                                             //log
+                                                Console.WriteLine(s.ToString());          //log
+                                                                                          //log
+                                            }                                             //log
+                                        }                                                 //log
+                                        Console.WriteLine("\n");                          //log
+
+                                        rect.DrawFigureCordPoint1(mas[x, 0], mas[x, 1]);
+                                        rect.DrawFigureCordPoint2(mas[x, 2], mas[x, 3]);
+                                        rect.DrawDash(g);
+                                    }
                                 }
                             }
+                            
+                            
                        // rect.Hide(g);
                         }
                         break;
