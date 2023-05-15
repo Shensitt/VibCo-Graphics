@@ -35,7 +35,7 @@ namespace WindowsFormsApp1
             // textBox1
             // 
             this.textBox1.Location = new System.Drawing.Point(477, 395);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.textBox1.Margin = new System.Windows.Forms.Padding(4);
             this.textBox1.Name = "textBox1";
             this.textBox1.Size = new System.Drawing.Size(132, 22);
             this.textBox1.TabIndex = 0;
@@ -51,7 +51,7 @@ namespace WindowsFormsApp1
             this.Controls.Add(this.textBox1);
             this.DoubleBuffered = true;
             this.ForeColor = System.Drawing.Color.White;
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Form2";
             this.ShowInTaskbar = false;
             this.Text = "Form2";
@@ -60,6 +60,8 @@ namespace WindowsFormsApp1
             this.Scroll += new System.Windows.Forms.ScrollEventHandler(this.Form2_Scroll);
             this.Click += new System.EventHandler(this.Form2_Click);
             this.Paint += new System.Windows.Forms.PaintEventHandler(this.Form2_Paint);
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.Form2_KeyDown);
+            this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.Form2_KeyPress);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseClick);
             this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseDown);
             this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form2_MouseMove);

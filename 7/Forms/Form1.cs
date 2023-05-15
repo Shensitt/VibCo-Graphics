@@ -266,15 +266,7 @@ namespace WindowsFormsApp1
 
         private void figureToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            int fig_sel = Form5.figure_selected;
 
-            Form5 myDialog = new Form5();
-            myDialog.ShowDialog(this);
-
-            if (Form5.figure_selected != fig_sel)
-            {
-                textBoxFont.Visible = false;
-            }
         }
 
         private void textToolStripMenuItem_Click(object sender, EventArgs e)
@@ -316,7 +308,7 @@ namespace WindowsFormsApp1
                 button1.FlatStyle = FlatStyle.Standard;
                 Form5.figure_selected = Form2.prev_figure_selected;
                 Form2.IsSelectMode = true;
-                button2.Enabled = false;
+                deleteToolStripMenuItem.Enabled = false;
             }
             else
             {
@@ -324,10 +316,10 @@ namespace WindowsFormsApp1
                 Form2.prev_figure_selected = Form5.figure_selected;
                 Form5.figure_selected = 5;
                 Form2.IsSelectMode = false;
-                button2.Enabled = true;
-                
+                deleteToolStripMenuItem.Enabled = true;
+
                 // Form2.selected_figure_number = null;
-                
+
             }
 
         }
@@ -355,6 +347,52 @@ namespace WindowsFormsApp1
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
         {
 
+        }
+
+        private void Form1_KeyPress(object sender, KeyPressEventArgs e)
+        {
+           
+        }
+
+        private void Form1_KeyDown(object sender, KeyEventArgs e)
+        {
+            //if (e.KeyCode == Keys.Delete)
+            //{
+            //    foreach (var s in Form2.selected_figures)
+            //    {
+            //        Form2.mas[s, 0] = 0;
+            //        Form2.mas[s, 2] = 0;
+            //        Form2.mas[s, 1] = 0;
+            //        Form2.mas[s, 3] = 0;
+            //        Form2.mas[s, 4] = 0;
+            //        Form2.mas[s, 5] = 0;
+            //        Form2.mas[s, 6] = 0;
+            //        Form2.mas[s, 7] = 0;
+            //        Form2.mas[s, 8] = 0;
+            //        Form2.mas[s, 9] = 0;
+            //        Form2.mas[s, 10] = 0;
+            //    }
+            //    Form2.selected_figures.Clear();
+            //}
+        }
+
+        private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            foreach (var s in Form2.selected_figures)
+            {
+                Form2.mas[s, 0] = 0;
+                Form2.mas[s, 2] = 0;
+                Form2.mas[s, 1] = 0;
+                Form2.mas[s, 3] = 0;
+                Form2.mas[s, 4] = 0;
+                Form2.mas[s, 5] = 0;
+                Form2.mas[s, 6] = 0;
+                Form2.mas[s, 7] = 0;
+                Form2.mas[s, 8] = 0;
+                Form2.mas[s, 9] = 0;
+                Form2.mas[s, 10] = 0;
+            }
+            Form2.selected_figures.Clear();
         }
     }
 }

@@ -3,7 +3,6 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
-using System.Linq;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -418,12 +417,12 @@ namespace WindowsFormsApp1
                                 rect.DrawFigureCordPoint2(X1,Y1);
                                 // rect.DrawDash(g);
                                 Selected_rect = new Rectangle(X0, Y0, e.X - X0, e.Y - Y0);
-                                var rectint=new System.Drawing.Rectangle(X0,Y0,e.X-X0,e.Y-Y0);
+                                var rectint=new Rectangle(X0,Y0,e.X-X0,e.Y-Y0);
 
                                 for (int x = 90; x >= 0; x--)//figures change
                                 {
                               
-                                    var rectangle=new System.Drawing.Rectangle(mas[x, 0], mas[x, 1], mas[x, 2], mas[x,3]);
+                                    var rectangle=new Rectangle(mas[x, 0], mas[x, 1], mas[x, 2], mas[x,3]);
                                     if (rectint.IntersectsWith(rectangle))
                                     {
                                         selected_figures.Add(x);
@@ -728,6 +727,50 @@ namespace WindowsFormsApp1
         private void Form2_MouseClick(object sender, MouseEventArgs e)
         {
             
+        }
+
+        private void Form2_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.Delete)
+            {
+                foreach (var s in selected_figures)
+                {
+                    mas[s, 0] = 0;
+                    mas[s, 2] = 0;
+                    mas[s, 1] = 0;
+                    mas[s, 3] = 0;
+                    mas[s, 4] = 0;
+                    mas[s, 5] = 0;
+                    mas[s, 6] = 0;
+                    mas[s, 7] = 0;
+                    mas[s, 8] = 0;
+                    mas[s, 9] = 0;
+                    mas[s, 10] = 0;
+                }
+                selected_figures.Clear();
+            }
+        }
+
+        private void Form2_KeyPress(object sender, KeyPressEventArgs e)
+        {
+        //    if (e.k== Keys.Delete)
+        //    {
+        //        foreach (var s in selected_figures)
+        //        {
+        //            mas[s, 0] = 0;
+        //            mas[s, 2] = 0;
+        //            mas[s, 1] = 0;
+        //            mas[s, 3] = 0;
+        //            mas[s, 4] = 0;
+        //            mas[s, 5] = 0;
+        //            mas[s, 6] = 0;
+        //            mas[s, 7] = 0;
+        //            mas[s, 8] = 0;
+        //            mas[s, 9] = 0;
+        //            mas[s, 10] = 0;
+        //        }
+        //        selected_figures.Clear();
+        //    }
         }
     }
 }
