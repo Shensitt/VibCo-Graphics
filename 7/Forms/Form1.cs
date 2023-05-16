@@ -309,7 +309,7 @@ namespace WindowsFormsApp1
             {
                 button1.FlatStyle = FlatStyle.Standard;
                 Form5.figure_selected = Form2.prev_figure_selected;
-                Form2.IsSelectMode = true;
+               // Form2.IsSelectMode = true;
                 Form2.selected_figures.Clear();
 
                 deleteToolStripMenuItem.Enabled = false;
@@ -319,7 +319,7 @@ namespace WindowsFormsApp1
                 button1.FlatStyle = FlatStyle.Flat;
                 Form2.prev_figure_selected = Form5.figure_selected;
                 Form5.figure_selected = 5;
-                Form2.IsSelectMode = false;
+                //Form2.IsSelectMode = false;
                 deleteToolStripMenuItem.Enabled = true;
 
                 // Form2.selected_figure_number = null;
@@ -457,10 +457,35 @@ namespace WindowsFormsApp1
 
         private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
+             //Form2.IsSelectMode = true;
+                button1.FlatStyle = FlatStyle.Flat;
+                Form2.prev_figure_selected = Form5.figure_selected;
+                Form5.figure_selected = 5;
+              //  Form2.IsSelectMode = false;
+                deleteToolStripMenuItem.Enabled = true;
+
             for (int x = 90; x >= 0; x--)//figures change
             {
-                    Form2.selected_figures.Add(x);
+               
+                Form2.selected_figures.Add(x);
             }
+        }
+
+        public static bool IsGridEnabled=false;
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+            if (!IsGridEnabled)
+            {
+                IsGridEnabled = true;
+                
+            }
+            else
+            {
+                IsGridEnabled = false;
+                Form2.grid_setup = 0;
+                
+            }
+
         }
     }
 }

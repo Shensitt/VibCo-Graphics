@@ -44,12 +44,13 @@ namespace WindowsFormsApp1
         public static Font font = SystemFonts.DefaultFont;
         public static string textString;
 
-       // int first_sel_move_iter = 0;
+        // int first_sel_move_iter = 0;
+        public static int grid_setup = 0;
         public static List<int> selected_figures=new List<int>();//для выделения фигур  //перенести его в класс дата и сохранять\обнулять
         public static int selected_figure_number;
-        public static bool IsSelectMode = false;
+        //public static bool IsSelectMode = false;
         static bool moveSelected = false;
-        Rectangle Selected_rect=new Rectangle();//прямоугольник выделения
+        Rectangle Selected_rect = new Rectangle();//прямоугольник выделения
 
         PictureBox pic = new PictureBox();
 
@@ -512,6 +513,29 @@ namespace WindowsFormsApp1
             var rect = new Rectangl();
             rect.Hide(g);
             g.Clear(Color.White);
+
+            if (grid_setup == 0)
+            {
+                if (Form1.IsGridEnabled)
+                {
+                    int gridSize = 10;
+                    for (int i = 0; i < form_width; i += gridSize)
+                    {
+                        for (int j = 0; j < form_width; j += gridSize)
+                        {
+                            rect.DrawFigureCordPoint1(i, j);
+                            rect.DrawFigureCordPoint2(gridSize, gridSize);
+                            rect.GetPenSet(Color.Gray, 1, Color.White, false);
+                            rect.DrawDash(g);
+
+                        }
+                    }
+                    grid_setup = 1;
+                }
+                
+            }
+           
+
             for (int xx = 0; xx <= figure_count; xx++)
             {
                 int x0 = mas[xx, 0] + AutoScrollPosition.X;
