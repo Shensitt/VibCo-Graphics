@@ -1,4 +1,6 @@
 ﻿using System;
+using System.Collections.Generic;
+using System.Drawing;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
@@ -308,6 +310,8 @@ namespace WindowsFormsApp1
                 button1.FlatStyle = FlatStyle.Standard;
                 Form5.figure_selected = Form2.prev_figure_selected;
                 Form2.IsSelectMode = true;
+                Form2.selected_figures.Clear();
+
                 deleteToolStripMenuItem.Enabled = false;
             }
             else
@@ -356,24 +360,7 @@ namespace WindowsFormsApp1
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-            //if (e.KeyCode == Keys.Delete)
-            //{
-            //    foreach (var s in Form2.selected_figures)
-            //    {
-            //        Form2.mas[s, 0] = 0;
-            //        Form2.mas[s, 2] = 0;
-            //        Form2.mas[s, 1] = 0;
-            //        Form2.mas[s, 3] = 0;
-            //        Form2.mas[s, 4] = 0;
-            //        Form2.mas[s, 5] = 0;
-            //        Form2.mas[s, 6] = 0;
-            //        Form2.mas[s, 7] = 0;
-            //        Form2.mas[s, 8] = 0;
-            //        Form2.mas[s, 9] = 0;
-            //        Form2.mas[s, 10] = 0;
-            //    }
-            //    Form2.selected_figures.Clear();
-            //}
+         
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -393,6 +380,87 @@ namespace WindowsFormsApp1
                 Form2.mas[s, 10] = 0;
             }
             Form2.selected_figures.Clear();
+        }
+
+        private void copyInFormatToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetData("copied", Form2.selected_figures);
+        }
+
+        private void copyMetafileToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Bitmap bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
+            //pictureBox1.DrawToBitmap(bitmap, new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
+            //Clipboard.SetImage(bitmap.Clone(new Rectangle(GetSelectionRectangleMeta(this).Location, new Size(GetSelectionRectangleMeta(this).Width + 1, GetSelectionRectangleMeta(this).Height + 1)), bitmap.PixelFormat));
+            //((Form1)this.ParentForm).Vstavka(false);
+        }
+
+        private void cutoutToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Clipboard.SetData("copied", Form2.selected_figures);
+
+            foreach (var s in Form2.selected_figures)
+            {
+                Form2.mas[s, 0] = 0;
+                Form2.mas[s, 2] = 0;
+                Form2.mas[s, 1] = 0;
+                Form2.mas[s, 3] = 0;
+                Form2.mas[s, 4] = 0;
+                Form2.mas[s, 5] = 0;
+                Form2.mas[s, 6] = 0;
+                Form2.mas[s, 7] = 0;
+                Form2.mas[s, 8] = 0;
+                Form2.mas[s, 9] = 0;
+                Form2.mas[s, 10] = 0;
+            }
+            Form2.selected_figures.Clear();
+        }
+
+        private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            //Graphics g = this.pictureBox1.CreateGraphics();
+            //paste = true;
+            //if (Clipboard.GetDataObject().GetDataPresent("paint"))
+            //{
+            //    if (GetSelectionRectangle(this, (List<AbstractFigure>)Clipboard.GetDataObject().GetData("paint")).Width <= pictureBox1.Width && GetSelectionRectangle(this, (List<AbstractFigure>)Clipboard.GetDataObject().GetData("paint")).Height <= pictureBox1.Height)
+            //    {
+            //        foreach (AbstractFigure f in copy.ToArray())
+            //        {
+            //            selected.Add(f);
+            //            copy.Remove(f);
+            //        }
+
+            //        List<AbstractFigure> F = ((List<AbstractFigure>)Clipboard.GetDataObject().GetData("paint"));
+
+            //        Point offset = new Point(-GetSelectionRectangle(this, F).Location.X, -GetSelectionRectangle(this, F).Location.Y);
+
+            //        selected.Clear();
+
+            //        foreach (AbstractFigure F1 in F)
+            //        {
+            //            F1.Move(g, offset.X, offset.Y);
+            //        }
+            //        foreach (AbstractFigure F1 in F)
+            //        {
+            //            selected.Add(F1);
+            //        }
+            //        Refresh();
+            //    }
+            //    else
+            //    {
+            //        MessageBox.Show("Маленький размер формы по сравнению с фигурой!");
+            //    }
+            //}
+            //paste = false;
+
+        }
+
+        private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            for (int x = 90; x >= 0; x--)//figures change
+            {
+                    Form2.selected_figures.Add(x);
+            }
         }
     }
 }

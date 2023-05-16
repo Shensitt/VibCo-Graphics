@@ -51,6 +51,11 @@ namespace WindowsFormsApp1
             this.button1 = new System.Windows.Forms.Button();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.deleteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyInFormatToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.copyMetafileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.cutoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -168,7 +173,12 @@ namespace WindowsFormsApp1
             // editToolStripMenuItem
             // 
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.deleteToolStripMenuItem});
+            this.deleteToolStripMenuItem,
+            this.copyInFormatToolStripMenuItem,
+            this.copyMetafileToolStripMenuItem,
+            this.cutoutToolStripMenuItem,
+            this.pasteToolStripMenuItem,
+            this.selectAllToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
             this.editToolStripMenuItem.ShowShortcutKeys = false;
             this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
@@ -341,6 +351,41 @@ namespace WindowsFormsApp1
             this.deleteToolStripMenuItem.Text = "Delete";
             this.deleteToolStripMenuItem.Click += new System.EventHandler(this.deleteToolStripMenuItem_Click);
             // 
+            // copyInFormatToolStripMenuItem
+            // 
+            this.copyInFormatToolStripMenuItem.Name = "copyInFormatToolStripMenuItem";
+            this.copyInFormatToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.copyInFormatToolStripMenuItem.Text = "Copy in format";
+            this.copyInFormatToolStripMenuItem.Click += new System.EventHandler(this.copyInFormatToolStripMenuItem_Click);
+            // 
+            // copyMetafileToolStripMenuItem
+            // 
+            this.copyMetafileToolStripMenuItem.Name = "copyMetafileToolStripMenuItem";
+            this.copyMetafileToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.copyMetafileToolStripMenuItem.Text = "Copy metafile";
+            this.copyMetafileToolStripMenuItem.Click += new System.EventHandler(this.copyMetafileToolStripMenuItem_Click);
+            // 
+            // cutoutToolStripMenuItem
+            // 
+            this.cutoutToolStripMenuItem.Name = "cutoutToolStripMenuItem";
+            this.cutoutToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.cutoutToolStripMenuItem.Text = "Cut";
+            this.cutoutToolStripMenuItem.Click += new System.EventHandler(this.cutoutToolStripMenuItem_Click);
+            // 
+            // pasteToolStripMenuItem
+            // 
+            this.pasteToolStripMenuItem.Name = "pasteToolStripMenuItem";
+            this.pasteToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.pasteToolStripMenuItem.Text = "Paste";
+            this.pasteToolStripMenuItem.Click += new System.EventHandler(this.pasteToolStripMenuItem_Click);
+            // 
+            // selectAllToolStripMenuItem
+            // 
+            this.selectAllToolStripMenuItem.Name = "selectAllToolStripMenuItem";
+            this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.selectAllToolStripMenuItem.Text = "Select All";
+            this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
+            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -413,6 +458,11 @@ namespace WindowsFormsApp1
         public System.Windows.Forms.Button button1;
         private System.Windows.Forms.ToolStripMenuItem toolStripMenuItem1;
         private System.Windows.Forms.ToolStripMenuItem deleteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyInFormatToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem copyMetafileToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem cutoutToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem pasteToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem selectAllToolStripMenuItem;
     }
 }
 

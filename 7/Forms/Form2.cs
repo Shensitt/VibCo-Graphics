@@ -44,6 +44,7 @@ namespace WindowsFormsApp1
         public static Font font = SystemFonts.DefaultFont;
         public static string textString;
 
+       // int first_sel_move_iter = 0;
         public static List<int> selected_figures=new List<int>();//для выделения фигур  //перенести его в класс дата и сохранять\обнулять
         public static int selected_figure_number;
         public static bool IsSelectMode = false;
@@ -275,10 +276,9 @@ namespace WindowsFormsApp1
                                //перемещать фигуры внутри прямоугольника выделения, в итоге будет двиа\гаться один прямоугольник а не все-> упрощение, нет проблем
                                 foreach (var s in selected_figures)
                                 {
-                                    mas[s, 0] =  e.X;
-                                    mas[s, 1] = e.Y;
-                                    // mas[s, 2]
-                                    // mas[s, 3]
+                                    mas[s, 0] = e.X /*- mas[s, 0]*/;
+                                    mas[s, 1] = e.Y /*- mas[s, 1]*/;   //if (first_sel_move_iter == 0)
+                                   
                                 }
 
                             }
@@ -731,46 +731,12 @@ namespace WindowsFormsApp1
 
         private void Form2_KeyDown(object sender, KeyEventArgs e)
         {
-            if (e.KeyCode == Keys.Delete)
-            {
-                foreach (var s in selected_figures)
-                {
-                    mas[s, 0] = 0;
-                    mas[s, 2] = 0;
-                    mas[s, 1] = 0;
-                    mas[s, 3] = 0;
-                    mas[s, 4] = 0;
-                    mas[s, 5] = 0;
-                    mas[s, 6] = 0;
-                    mas[s, 7] = 0;
-                    mas[s, 8] = 0;
-                    mas[s, 9] = 0;
-                    mas[s, 10] = 0;
-                }
-                selected_figures.Clear();
-            }
+            
         }
 
         private void Form2_KeyPress(object sender, KeyPressEventArgs e)
         {
-        //    if (e.k== Keys.Delete)
-        //    {
-        //        foreach (var s in selected_figures)
-        //        {
-        //            mas[s, 0] = 0;
-        //            mas[s, 2] = 0;
-        //            mas[s, 1] = 0;
-        //            mas[s, 3] = 0;
-        //            mas[s, 4] = 0;
-        //            mas[s, 5] = 0;
-        //            mas[s, 6] = 0;
-        //            mas[s, 7] = 0;
-        //            mas[s, 8] = 0;
-        //            mas[s, 9] = 0;
-        //            mas[s, 10] = 0;
-        //        }
-        //        selected_figures.Clear();
-        //    }
+      
         }
     }
 }
