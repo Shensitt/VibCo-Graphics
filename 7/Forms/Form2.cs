@@ -23,6 +23,7 @@ namespace WindowsFormsApp1
         public int Y1;
         public static int figure_count = 0;
         public static int[,] mas = new int[100, 11];
+        int[,] selected_mas=new int[100, 11];
 
         public string[] stringTextArr = new string[100];//новый массив для сохзранения
         public string[] jsonSave = new string[100];
@@ -51,6 +52,7 @@ namespace WindowsFormsApp1
         //public static bool IsSelectMode = false;
         static bool moveSelected = false;
         Rectangle Selected_rect = new Rectangle();//прямоугольник выделения
+        public static int[,] selecter_arr;
 
         PictureBox pic = new PictureBox();
 
@@ -143,6 +145,7 @@ namespace WindowsFormsApp1
                         {
                             Rectangle r = new Rectangle(e.X, e.Y, 0, 0);
                             moveSelected = false;
+                            selected_mas = mas;
                             foreach (var s in selected_figures)
                             {
                                 Rectangle re = new Rectangle(mas[s, 0], mas[s, 1], mas[s, 2], mas[s, 3]);
@@ -274,13 +277,18 @@ namespace WindowsFormsApp1
                         {
                             if (moveSelected)
                             {
-                               //перемещать фигуры внутри прямоугольника выделения, в итоге будет двиа\гаться один прямоугольник а не все-> упрощение, нет проблем
+                                //перемещать фигуры внутри прямоугольника выделения, в итоге будет двиа\гаться один прямоугольник а не все-> упрощение, нет проблем
+                                //foreach (var s in selected_figures)
+                                //{
+                                //    mas[s, 0] = e.X /*- mas[s, 0]*/;
+                                //    mas[s, 1] = e.Y /*- mas[s, 1]*/;   //if (first_sel_move_iter == 0)
+
                                 foreach (var s in selected_figures)
-                                {
-                                    mas[s, 0] = e.X /*- mas[s, 0]*/;
-                                    mas[s, 1] = e.Y /*- mas[s, 1]*/;   //if (first_sel_move_iter == 0)
-                                   
+                                {/////////////////////////////////////////////////////////////////////разобраться с передвижением нескольких фигур
+                                 mas[s, 0] = mas[s, 0]+ X1;
+                                 mas[s, 1] = mas[s, 1] +Y1;
                                 }
+                                //}
 
                             }
                             else { 
@@ -443,6 +451,15 @@ namespace WindowsFormsApp1
                                     }
                                 }
                             }
+                            else
+                            {
+                                //foreach (var s in selected_figures)
+                                //{
+                                //    mas[s, 0] = mas[s, 0] +X1- X0;
+                                //    mas[s, 1] = mas[s, 1] +Y1- Y0;
+                                //}
+                            }
+                           // mas=selected_mas; 
                             
                             
                        // rect.Hide(g);
