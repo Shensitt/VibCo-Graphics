@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -53,6 +54,7 @@ namespace WindowsFormsApp1
         static bool moveSelected = false;
         Rectangle Selected_rect = new Rectangle();//прямоугольник выделения
         public static int[,] selecter_arr;
+       // static int s0x ,s0y ;
 
         PictureBox pic = new PictureBox();
 
@@ -151,10 +153,17 @@ namespace WindowsFormsApp1
                                 Rectangle re = new Rectangle(mas[s, 0], mas[s, 1], mas[s, 2], mas[s, 3]);
                                 if (r.IntersectsWith(re))
                                 {
-                                    moveSelected=true;
+                                    //if (s == 0)
+                                    //{     
+                                    //    s0x = mas[s, 0]; s0y = mas[s, 1];
+
+
+                                    //}
+                                    moveSelected =true;
                                 }
                             }
                             
+
                         }
                         break;
                 }
@@ -199,7 +208,7 @@ namespace WindowsFormsApp1
 
             if (draw_frag == true)
             {
-                repaint(); //selected_figures = null;
+                repaint(); 
                 Graphics g = CreateGraphics();
 
                 figure_selected = Form5.figure_selected;
@@ -277,19 +286,24 @@ namespace WindowsFormsApp1
                         {
                             if (moveSelected)
                             {
-                                //перемещать фигуры внутри прямоугольника выделения, в итоге будет двиа\гаться один прямоугольник а не все-> упрощение, нет проблем
-                                //foreach (var s in selected_figures)
-                                //{
-                                //    mas[s, 0] = e.X /*- mas[s, 0]*/;
-                                //    mas[s, 1] = e.Y /*- mas[s, 1]*/;   //if (first_sel_move_iter == 0)
-
+                                //s0x = mas[0, 0]; s0y = mas[0, 1];
                                 foreach (var s in selected_figures)
-                                {/////////////////////////////////////////////////////////////////////разобраться с передвижением нескольких фигур
-                                 mas[s, 0] = mas[s, 0]+ X1;
-                                 mas[s, 1] = mas[s, 1] +Y1;
-                                }
-                                //}
+                                {
+                                    if (s == 0)
+                                    {
+                                        //s0x = mas[s, 0];
+                                        //s0y = mas[s, 1];
 
+                                        mas[s, 0] = e.X;
+                                        mas[s, 1] = e.Y;
+                                    }
+                                    else
+                                    {
+                                        mas[s, 0] = e.X + (mas[s,0] - mas[0,0]);
+                                        mas[s, 1] = e.Y + (mas[s, 1] - mas[0, 1]);
+                                    }
+                                    
+                                }
                             }
                             else { 
                                  selected_figures.Clear();//? неудачное место мб
@@ -450,16 +464,19 @@ namespace WindowsFormsApp1
                                         rect.DrawDash(g);
                                     }
                                 }
+                               
+                               
                             }
                             else
                             {
                                 //foreach (var s in selected_figures)
                                 //{
-                                //    mas[s, 0] = mas[s, 0] +X1- X0;
-                                //    mas[s, 1] = mas[s, 1] +Y1- Y0;
+                                //    mas[s, 0] += e.X - AutoScrollPosition.X;
+                                //    mas[s, 1] += e.Y - AutoScrollPosition.Y;
                                 //}
+                                //s0x = mas[0, 0];
+                                //s0y = mas[0, 1];
                             }
-                           // mas=selected_mas; 
                             
                             
                        // rect.Hide(g);
