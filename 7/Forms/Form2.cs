@@ -3,6 +3,7 @@ using Newtonsoft.Json.Linq;
 using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Runtime.Remoting.Metadata.W3cXsd2001;
 using System.Windows.Forms;
 
 namespace WindowsFormsApp1
@@ -23,7 +24,7 @@ namespace WindowsFormsApp1
         public int Y1;
         public static int figure_count = 0;
         public static int[,] mas = new int[100, 11];
-        int[,] selected_mas=new int[100, 11];
+      //  int[,] selected_mas=new int[100, 11];
 
         public string[] stringTextArr = new string[100];//новый массив для сохзранения
         public string[] jsonSave = new string[100];
@@ -45,11 +46,9 @@ namespace WindowsFormsApp1
         public static Font font = SystemFonts.DefaultFont;
         public static string textString;
 
-        // int first_sel_move_iter = 0;
         public static int grid_setup = 0;
         public static List<int> selected_figures=new List<int>();//для выделения фигур  //перенести его в класс дата и сохранять\обнулять
         public static int selected_figure_number;
-        //public static bool IsSelectMode = false;
         static bool moveSelected = false;
         Rectangle Selected_rect = new Rectangle();//прямоугольник выделения
         public static int[,] selecter_arr;
@@ -145,16 +144,17 @@ namespace WindowsFormsApp1
                         {
                             Rectangle r = new Rectangle(e.X, e.Y, 0, 0);
                             moveSelected = false;
-                            selected_mas = mas;
+                          //  selected_mas = mas;
                             foreach (var s in selected_figures)
                             {
                                 Rectangle re = new Rectangle(mas[s, 0], mas[s, 1], mas[s, 2], mas[s, 3]);
                                 if (r.IntersectsWith(re))
                                 {
-                                    moveSelected=true;
+                                    moveSelected =true;
                                 }
                             }
                             
+
                         }
                         break;
                 }
@@ -199,7 +199,7 @@ namespace WindowsFormsApp1
 
             if (draw_frag == true)
             {
-                repaint(); //selected_figures = null;
+                repaint(); 
                 Graphics g = CreateGraphics();
 
                 figure_selected = Form5.figure_selected;
@@ -277,19 +277,20 @@ namespace WindowsFormsApp1
                         {
                             if (moveSelected)
                             {
-                                //перемещать фигуры внутри прямоугольника выделения, в итоге будет двиа\гаться один прямоугольник а не все-> упрощение, нет проблем
-                                //foreach (var s in selected_figures)
-                                //{
-                                //    mas[s, 0] = e.X /*- mas[s, 0]*/;
-                                //    mas[s, 1] = e.Y /*- mas[s, 1]*/;   //if (first_sel_move_iter == 0)
-
                                 foreach (var s in selected_figures)
-                                {/////////////////////////////////////////////////////////////////////разобраться с передвижением нескольких фигур
-                                 mas[s, 0] = mas[s, 0]+ X1;
-                                 mas[s, 1] = mas[s, 1] +Y1;
+                                {
+                                    if (s == 0)
+                                    {
+                                       mas[s, 0] = e.X;
+                                       mas[s, 1] = e.Y;
+                                    }
+                                    else
+                                    {
+                                       mas[s, 0] = e.X + (mas[s,0] - mas[0,0]);
+                                       mas[s, 1] = e.Y + (mas[s, 1] -mas[0, 1]);
+                                    }
+                                    
                                 }
-                                //}
-
                             }
                             else { 
                                  selected_figures.Clear();//? неудачное место мб
@@ -309,6 +310,7 @@ namespace WindowsFormsApp1
 
         public void Form2_MouseUp(object sender, MouseEventArgs e)
         {
+            moveSelected = false;
             repaint();
             Graphics gg = this.pic.CreateGraphics();
             pic.Width = this.Width;
@@ -450,16 +452,19 @@ namespace WindowsFormsApp1
                                         rect.DrawDash(g);
                                     }
                                 }
+                               
+                               
                             }
                             else
                             {
                                 //foreach (var s in selected_figures)
                                 //{
-                                //    mas[s, 0] = mas[s, 0] +X1- X0;
-                                //    mas[s, 1] = mas[s, 1] +Y1- Y0;
+                                //    mas[s, 0] += e.X - AutoScrollPosition.X;
+                                //    mas[s, 1] += e.Y - AutoScrollPosition.Y;
                                 //}
+                                //s0x = mas[0, 0];
+                                //s0y = mas[0, 1];
                             }
-                           // mas=selected_mas; 
                             
                             
                        // rect.Hide(g);
@@ -579,7 +584,12 @@ namespace WindowsFormsApp1
                             rect.GetPenSet(pen_col, pen_width, fillcol, fill);
                             rect.DrawFigureCordPoint1(x0, y0);
                             rect.DrawFigureCordPoint2(x1, y1);
-                            rect.Draw(g);
+                            if (moveSelected)
+                            {
+                                rect.DrawDash(g);
+                            }
+                            else {                             rect.Draw(g);
+}
                             if(selected_figures!=null)
                             foreach(var selected in selected_figures)
                             {
