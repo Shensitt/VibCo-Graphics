@@ -228,7 +228,6 @@ namespace WindowsFormsApp1
             // 
             // copyInFormatToolStripMenuItem
             // 
-            this.copyInFormatToolStripMenuItem.Enabled = false;
             this.copyInFormatToolStripMenuItem.Name = "copyInFormatToolStripMenuItem";
             this.copyInFormatToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.copyInFormatToolStripMenuItem.Text = "Copy in format";

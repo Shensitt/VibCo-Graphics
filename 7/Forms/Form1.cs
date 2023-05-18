@@ -310,7 +310,7 @@ namespace WindowsFormsApp1
             {
                 button1.FlatStyle = FlatStyle.Standard;
                 Form5.figure_selected = Form2.prev_figure_selected;
-               // Form2.IsSelectMode = true;
+                // Form2.IsSelectMode = true;
                 Form2.selected_figures.Clear();
 
                 deleteToolStripMenuItem.Enabled = false;
@@ -333,20 +333,20 @@ namespace WindowsFormsApp1
         {
             foreach (var s in Form2.selected_figures)
             {
-                 Form2.mas[s, 0] = 0;
-                 Form2.mas[s, 2] = 0;
-                 Form2.mas[s, 1] = 0;
-                 Form2.mas[s, 3] = 0;
-                 Form2.mas[s, 4] = 0;
-                 Form2.mas[s, 5] = 0;
-                 Form2.mas[s, 6] = 0;
-                 Form2.mas[s, 7] = 0;
-                 Form2.mas[s, 8] = 0;
-                 Form2.mas[s, 9] = 0;
-                 Form2.mas[s, 10] = 0;
+                Form2.mas[s, 0] = 0;
+                Form2.mas[s, 2] = 0;
+                Form2.mas[s, 1] = 0;
+                Form2.mas[s, 3] = 0;
+                Form2.mas[s, 4] = 0;
+                Form2.mas[s, 5] = 0;
+                Form2.mas[s, 6] = 0;
+                Form2.mas[s, 7] = 0;
+                Form2.mas[s, 8] = 0;
+                Form2.mas[s, 9] = 0;
+                Form2.mas[s, 10] = 0;
             }
             Form2.selected_figures.Clear();
-            
+
         }
 
         private void fileToolStripMenuItem_Click(object sender, EventArgs e)
@@ -356,12 +356,12 @@ namespace WindowsFormsApp1
 
         private void Form1_KeyPress(object sender, KeyPressEventArgs e)
         {
-           
+
         }
 
         private void Form1_KeyDown(object sender, KeyEventArgs e)
         {
-         
+
         }
 
         private void deleteToolStripMenuItem_Click(object sender, EventArgs e)
@@ -381,86 +381,121 @@ namespace WindowsFormsApp1
                 Form2.mas[s, 10] = 0;
             }
             Form2.selected_figures.Clear();
+
         }
 
         private void copyInFormatToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Clipboard.SetData("copied", Form2.selected_figures);
+            Thread thread = new Thread(() => Clipboard.SetData("copied", Form2.selected_figures));
+            thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
+            thread.Start();
+            thread.Join();
         }
 
+        [STAThread]
         private void copyMetafileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Graphics gr = CreateGraphics();
-            IntPtr dc = gr.GetHdc();
-            Metafile mf = new Metafile(dc, EmfType.EmfOnly);
-            gr.ReleaseHdc(dc);
-            gr.Dispose();
-
-            //Bitmap bitmap = new Bitmap("pictopaste");
-            //Form2 form = new Form2();
-            //form.DrawToBitmap(bitmap, new Rectangle(0, 0, form_width,form_height));
-            //Clipboard.SetImage(bitmap.Clone(new Rectangle(Form2.Selected_rect.Location,Form2.Selected_rect.Size), bitmap.PixelFormat));
+            string s = "";
+            foreach (var sel in Form2.selected_figures)
+            {
+                s += sel.ToString() + "\n";
+            }
+            Thread thread = new Thread(() => Clipboard.SetText( s));
+            thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
+            thread.Start();
+            thread.Join();
+           
         }
 
         private void cutoutToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            Clipboard.SetData("copied", Form2.selected_figures);
+            Thread thread = new Thread(() => Clipboard.SetData("copied", Form2.selected_figures));
+            thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
+            thread.Start();
+            thread.Join();
 
             foreach (var s in Form2.selected_figures)
             {
                 Form2.mas[s, 0] = 0;
-                Form2.mas[s, 2] = 0;
                 Form2.mas[s, 1] = 0;
-                Form2.mas[s, 3] = 0;
-                Form2.mas[s, 4] = 0;
-                Form2.mas[s, 5] = 0;
-                Form2.mas[s, 6] = 0;
-                Form2.mas[s, 7] = 0;
-                Form2.mas[s, 8] = 0;
-                Form2.mas[s, 9] = 0;
-                Form2.mas[s, 10] = 0;
             }
             Form2.selected_figures.Clear();
         }
 
         private void pasteToolStripMenuItem_Click(object sender, EventArgs e)
-        {
-            //Graphics g = this.pictureBox1.CreateGraphics();
-            //paste = true;
-            //if (Clipboard.GetDataObject().GetDataPresent("paint"))
-            //{
-            //    if (GetSelectionRectangle(this, (List<AbstractFigure>)Clipboard.GetDataObject().GetData("paint")).Width <= pictureBox1.Width && GetSelectionRectangle(this, (List<AbstractFigure>)Clipboard.GetDataObject().GetData("paint")).Height <= pictureBox1.Height)
-            //    {
-            //        foreach (AbstractFigure f in copy.ToArray())
-            //        {
-            //            selected.Add(f);
-            //            copy.Remove(f);
-            //        }
+        { 
+            Thread thread = new Thread(() => {
+                if (Clipboard.GetDataObject().GetDataPresent("copied"))
+                {
+                    button1.FlatStyle = FlatStyle.Flat;
+                    Form5.figure_selected = 5;
+                    var d = Clipboard.GetDataObject();
+                    Form2.selected_figures = (List<int>)d.GetData("copied");
 
-            //        List<AbstractFigure> F = ((List<AbstractFigure>)Clipboard.GetDataObject().GetData("paint"));
+                    foreach (var s in Form2.selected_figures)
+                    {
+                        Form2.mas[s + 50, 0] = Form2.mas[s, 0];
+                        Form2.mas[s + 50, 1] = Form2.mas[s, 1];
+                        Form2.mas[s + 50, 2] = Form2.mas[s, 2];
+                        Form2.mas[s + 50, 3] = Form2.mas[s, 3];
+                        Form2.mas[s + 50, 4] = Form2.mas[s, 4];
+                        Form2.mas[s + 50, 5] = Form2.mas[s, 5];
+                        Form2.mas[s + 50, 6] = Form2.mas[s, 6];
+                        Form2.mas[s + 50, 7] = Form2.mas[s, 7];
+                        Form2.mas[s + 50, 8] = Form2.mas[s, 8];
+                        Form2.mas[s + 50, 9] = Form2.mas[s, 9];
+                        Form2.mas[s + 50, 10] = Form2.mas[s, 10];
+                        data.mas= Form2.mas;    
+                       // Form2.mas[s + 50, 11] = Form2.mas[s, 0];
+                        if (s == 0)
+                        {
+                            if (Form2.mas[s, 0] + Form2.mas[s, 2] < form_width - 1)
+                            {
+                                Form2.mas[s+50, 0] = 0;
 
-            //        Point offset = new Point(-GetSelectionRectangle(this, F).Location.X, -GetSelectionRectangle(this, F).Location.Y);
+                            }
+                            else
+                            {
+                                MessageBox.Show("pasted content is bigger that form size"); Form2.selected_figures.Clear(); break;
+                            }
+                            if (Form2.mas[s, 1] + Form2.mas[s, 3] < form_height - 1)
+                            {
+                                Form2.mas[s+50, 1] = 0;
+                            }
+                            else
+                            {
+                                MessageBox.Show("pasted content is bigger that form size"); Form2.selected_figures.Clear(); break;
+                            }
+                        }
+                        else
+                        {
+                            if (Form2.mas[s, 0] + Form2.mas[s, 2] < form_width - 1)
+                            {
+                                Form2.mas[s+50, 0] = 0 + (Form2.mas[s + 50, 0] - Form2.mas[50, 0]);
+                            }
+                            else
+                            {
+                                MessageBox.Show("pasted content is bigger that form size"); Form2.selected_figures.Clear(); break;
+                            }
+                            if (Form2.mas[s, 1] + Form2.mas[s, 3] < form_height - 1)
+                            {
+                                Form2.mas[s+50, 1] = 0 + (Form2.mas[s + 50, 1] - Form2.mas[50, 1]);
+                            }
+                            else
+                            {
+                                MessageBox.Show("pasted content is bigger that form size"); Form2.selected_figures.Clear(); break;
+                            }
 
-            //        selected.Clear();
-
-            //        foreach (AbstractFigure F1 in F)
-            //        {
-            //            F1.Move(g, offset.X, offset.Y);
-            //        }
-            //        foreach (AbstractFigure F1 in F)
-            //        {
-            //            selected.Add(F1);
-            //        }
-            //        Refresh();
-            //    }
-            //    else
-            //    {
-            //        MessageBox.Show("Маленький размер формы по сравнению с фигурой!");
-            //    }
-            //}
-            //paste = false;
-
+                        }
+                    }
+                }
+            });
+            thread.SetApartmentState(ApartmentState.STA); //Set the thread to STA
+            thread.Start();
+            thread.Join();
         }
+
+        
 
         private void selectAllToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -481,6 +516,7 @@ namespace WindowsFormsApp1
         public static bool IsGridEnabled=false;
         private void button2_Click_1(object sender, EventArgs e)
         {
+            
             if (!IsGridEnabled)
             {
                 IsGridEnabled = true;

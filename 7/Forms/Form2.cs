@@ -53,8 +53,9 @@ namespace WindowsFormsApp1
         //public static bool IsSelectMode = false;
         static bool moveSelected = false;
         public static Rectangle Selected_rect = new Rectangle();//прямоугольник выделения
-       // public static int[,] selecter_arr;
-       // static int s0x ,s0y ;
+                                                                // public static int[,] selecter_arr;
+                                                                // static int s0x ,s0y ;
+        bool selected_toClear = false;
 
         PictureBox pic = new PictureBox();
 
@@ -152,12 +153,7 @@ namespace WindowsFormsApp1
                                 Rectangle re = new Rectangle(mas[s, 0], mas[s, 1], mas[s, 2], mas[s, 3]);
                                 if (r.IntersectsWith(re))
                                 {
-                                    //if (s == 0)
-                                    //{     
-                                    //    s0x = mas[s, 0]; s0y = mas[s, 1];
-
-
-                                    //}
+                                   
                                     moveSelected =true;
                                 }
                             }
@@ -285,24 +281,55 @@ namespace WindowsFormsApp1
                         {
                             if (moveSelected)
                             {
-                                //s0x = mas[0, 0]; s0y = mas[0, 1];
                                 foreach (var s in selected_figures)
                                 {
                                     if (s == 0)
                                     {
-                                        //s0x = mas[s, 0];
-                                        //s0y = mas[s, 1];
+                                        if (mas[s, 0] + mas[s, 2] < form_width - 1 )
+                                        {
+                                            mas[s, 0] = e.X;
 
-                                        mas[s, 0] = e.X;
-                                        mas[s, 1] = e.Y;
+                                        }
+                                        else
+                                        {
+                                            mas[s, 0]-= 100;
+                                        }
+                                        if (mas[s, 1] + mas[s, 3] < form_height-1 )
+                                        {
+                                            mas[s, 1] = e.Y;
+                                        }
+                                        else
+                                        {
+                                           mas[s, 1]-=100;
+                                        }
+
+
                                     }
                                     else
                                     {
-                                        mas[s, 0] = e.X + (mas[s,0] - mas[0,0]);
-                                        mas[s, 1] = e.Y + (mas[s, 1] - mas[0, 1]);
+                                        if (mas[s, 0] + mas[s, 2] < form_width - 1)
+                                        {
+                                            mas[s, 0] = e.X + (mas[s, 0] - mas[0, 0]);
+                                        }
+                                        else
+                                        {
+                                            mas[s, 0] -= 100;
+                                        }
+                                        if (mas[s, 1] + mas[s, 3] < form_height - 1)
+                                        {
+                                            mas[s, 1] = e.Y + (mas[s, 1] - mas[0, 1]);
+                                        }
+                                        else
+                                        {
+                                            mas[s, 1] -= 100;
+                                        }
+                                       
+                                        
                                     }
-                                    
+
+                                    //
                                 }
+
                             }
                             else { 
                                  selected_figures.Clear();//? неудачное место мб
@@ -441,32 +468,28 @@ namespace WindowsFormsApp1
                                 Selected_rect = new Rectangle(X0, Y0, e.X - X0, e.Y - Y0);
                                 var rectint=new Rectangle(X0,Y0,e.X-X0,e.Y-Y0);
 
-                                for (int x = 90; x >= 0; x--)//figures change
+                            for (int x = 90; x >= 0; x--)//figures change
+                            {
+
+                                var rectangle = new Rectangle(mas[x, 0], mas[x, 1], mas[x, 2], mas[x, 3]);
+                                if (rectint.IntersectsWith(rectangle))
                                 {
-                              
-                                    var rectangle=new Rectangle(mas[x, 0], mas[x, 1], mas[x, 2], mas[x,3]);
-                                    if (rectint.IntersectsWith(rectangle))
+                                    selected_figures.Add(x);
+                                    if (selected_figures != null)
                                     {
-                                        selected_figures.Add(x);
-                                        if (selected_figures != null)                     //log
-                                        {                                                 //log
-                                            foreach (var s in selected_figures)           //log
-                                            {                                             //log
-                                                Console.WriteLine(s.ToString());          //log
-                                                                                          //log
-                                            }                                             //log
-                                        }                                                 //log
-                                        Console.WriteLine("\n");                          //log
+                                        foreach (var s in selected_figures)
+                                        {
+                                            Console.WriteLine(s.ToString());
 
-                                        rect.DrawFigureCordPoint1(mas[x, 0], mas[x, 1]);
-                                        rect.DrawFigureCordPoint2(mas[x, 2], mas[x, 3]);
-                                        rect.DrawDash(g);
+                                        }
                                     }
-                                }
-                               
-                               
-                           
+                                    Console.WriteLine("\n");
 
+                                    rect.DrawFigureCordPoint1(mas[x, 0], mas[x, 1]);
+                                    rect.DrawFigureCordPoint2(mas[x, 2], mas[x, 3]);
+                                    rect.DrawDash(g);
+                                }
+                            }
 
                             // rect.Hide(g);
                         }
@@ -474,16 +497,6 @@ namespace WindowsFormsApp1
                 }
             }
             draw_frag = false;
-
-
-            //foreach (var s in selected_figures)
-            //{
-            //    if (mas[s, 2] + mas[s, 0] > mas[s, 8] || mas[s, 3] + mas[s, 1] > mas[s, 7])
-            //    {
-            //        mas = selected_mas;
-            //        Console.Write((mas[s, 2] + mas[s, 0]).ToString());
-            //    }
-            //}
 
             if (figure_selected != 5)
             {
@@ -547,7 +560,7 @@ namespace WindowsFormsApp1
             var rect = new Rectangl();
             rect.Hide(g);
             g.Clear(Color.White);
-
+           // g.DrawRectangle,)
             if (grid_setup == 0)
             {
                 if (Form1.IsGridEnabled)
@@ -576,6 +589,8 @@ namespace WindowsFormsApp1
                 int x1 = mas[xx, 2];
                 int y0 = mas[xx, 1] + AutoScrollPosition.Y;
                 int y1 = mas[xx, 3];
+
+              
                 bool fill;
                 if (mas[xx, 10] == 1)
                 {
