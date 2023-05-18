@@ -323,6 +323,7 @@ namespace WindowsFormsApp1
 
         public void Form2_MouseUp(object sender, MouseEventArgs e)
         {
+            moveSelected = false;
             repaint();
             Graphics gg = this.pic.CreateGraphics();
             pic.Width = this.Width;
@@ -596,7 +597,12 @@ namespace WindowsFormsApp1
                             rect.GetPenSet(pen_col, pen_width, fillcol, fill);
                             rect.DrawFigureCordPoint1(x0, y0);
                             rect.DrawFigureCordPoint2(x1, y1);
-                            rect.Draw(g);
+                            if (moveSelected)
+                            {
+                                rect.DrawDash(g);
+                            }
+                            else {                             rect.Draw(g);
+}
                             if(selected_figures!=null)
                             foreach(var selected in selected_figures)
                             {
@@ -613,7 +619,14 @@ namespace WindowsFormsApp1
                             eli.GetPenSet(pen_col, pen_width, fillcol, fill);
                             eli.DrawFigureCordPoint1(x0, y0);
                             eli.DrawFigureCordPoint2(x1, y1);
-                            eli.Draw(g);
+                            if (moveSelected)
+                            {
+                                eli.DrawDash(g);
+                            }
+                            else
+                            {
+                                eli.Draw(g);
+                            }
                             if (selected_figures != null)
 
                                 foreach (var selected in selected_figures)
@@ -631,7 +644,14 @@ namespace WindowsFormsApp1
                             str.GetPenSet(pen_col, pen_width, fillcol, fill);
                             str.DrawFigureCordPoint1(x0, y0);
                             str.DrawFigureCordPoint2(x1, y1);
-                            str.Draw(g);
+                            if (moveSelected)
+                            {
+                                str.DrawDash(g);
+                            }
+                            else
+                            {
+                                str.Draw(g);
+                            }
                             if (selected_figures != null)
 
                                 foreach (var selected in selected_figures)
@@ -667,7 +687,14 @@ namespace WindowsFormsApp1
                             aa = 1;
                             var str = new Curveline();
                             str.GetPenSet(pen_col, pen_width, fillcol, fill);
-                            str.Draw(g);
+                            if (moveSelected)
+                            {
+                                str.DrawDash(g);
+                            }
+                            else
+                            {
+                                str.Draw(g);
+                            }
                             if (selected_figures != null)
 
                                 foreach (var selected in selected_figures)
