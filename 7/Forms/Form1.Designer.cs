@@ -33,6 +33,7 @@ namespace WindowsFormsApp1
             this.lineColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.lineThicknessToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.backgroundColorToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.gridSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripMenuItem1 = new System.Windows.Forms.ToolStripMenuItem();
             this.textToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.fontToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -43,6 +44,7 @@ namespace WindowsFormsApp1
             this.cutoutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pasteToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.selectAllToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.setToGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.textBox1 = new System.Windows.Forms.TextBox();
             this.textBoxPenSize = new System.Windows.Forms.TextBox();
@@ -56,8 +58,6 @@ namespace WindowsFormsApp1
             this.textBoxMousePosition = new System.Windows.Forms.TextBox();
             this.textBoxFont = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.gridSizeToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.setToGridToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonGrid = new System.Windows.Forms.Button();
             this.menuStrip2.SuspendLayout();
             this.SuspendLayout();
@@ -102,7 +102,7 @@ namespace WindowsFormsApp1
             this.newToolStripMenuItem2.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.chooseFileSizeToolStripMenuItem});
             this.newToolStripMenuItem2.Name = "newToolStripMenuItem2";
-            this.newToolStripMenuItem2.Size = new System.Drawing.Size(224, 26);
+            this.newToolStripMenuItem2.Size = new System.Drawing.Size(150, 26);
             this.newToolStripMenuItem2.Text = "New";
             this.newToolStripMenuItem2.Click += new System.EventHandler(this.newToolStripMenuItem2_Click);
             // 
@@ -116,7 +116,7 @@ namespace WindowsFormsApp1
             // openToolStripMenuItem
             // 
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
             this.openToolStripMenuItem.Text = "Open";
             this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
@@ -124,7 +124,7 @@ namespace WindowsFormsApp1
             // 
             this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
             this.saveToolStripMenuItem.Text = "Save";
             this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
@@ -132,7 +132,7 @@ namespace WindowsFormsApp1
             // 
             this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(150, 26);
             this.saveAsToolStripMenuItem.Text = "Save as...";
             this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
@@ -156,23 +156,29 @@ namespace WindowsFormsApp1
             // lineColorToolStripMenuItem
             // 
             this.lineColorToolStripMenuItem.Name = "lineColorToolStripMenuItem";
-            this.lineColorToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.lineColorToolStripMenuItem.Size = new System.Drawing.Size(209, 26);
             this.lineColorToolStripMenuItem.Text = "Line color";
             this.lineColorToolStripMenuItem.Click += new System.EventHandler(this.lineColorToolStripMenuItem_Click);
             // 
             // lineThicknessToolStripMenuItem
             // 
             this.lineThicknessToolStripMenuItem.Name = "lineThicknessToolStripMenuItem";
-            this.lineThicknessToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.lineThicknessToolStripMenuItem.Size = new System.Drawing.Size(209, 26);
             this.lineThicknessToolStripMenuItem.Text = "Line thickness";
             this.lineThicknessToolStripMenuItem.Click += new System.EventHandler(this.lineThicknessToolStripMenuItem_Click);
             // 
             // backgroundColorToolStripMenuItem
             // 
             this.backgroundColorToolStripMenuItem.Name = "backgroundColorToolStripMenuItem";
-            this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.backgroundColorToolStripMenuItem.Size = new System.Drawing.Size(209, 26);
             this.backgroundColorToolStripMenuItem.Text = "Background color";
             this.backgroundColorToolStripMenuItem.Click += new System.EventHandler(this.backgroundColorToolStripMenuItem_Click);
+            // 
+            // gridSizeToolStripMenuItem
+            // 
+            this.gridSizeToolStripMenuItem.Name = "gridSizeToolStripMenuItem";
+            this.gridSizeToolStripMenuItem.Size = new System.Drawing.Size(209, 26);
+            this.gridSizeToolStripMenuItem.Text = "Grid size";
             // 
             // toolStripMenuItem1
             // 
@@ -192,7 +198,7 @@ namespace WindowsFormsApp1
             // fontToolStripMenuItem
             // 
             this.fontToolStripMenuItem.Name = "fontToolStripMenuItem";
-            this.fontToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.fontToolStripMenuItem.Size = new System.Drawing.Size(121, 26);
             this.fontToolStripMenuItem.Text = "Font";
             this.fontToolStripMenuItem.Click += new System.EventHandler(this.fontToolStripMenuItem_Click);
             // 
@@ -230,7 +236,6 @@ namespace WindowsFormsApp1
             // 
             // copyMetafileToolStripMenuItem
             // 
-            this.copyMetafileToolStripMenuItem.Enabled = false;
             this.copyMetafileToolStripMenuItem.Name = "copyMetafileToolStripMenuItem";
             this.copyMetafileToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.copyMetafileToolStripMenuItem.Text = "Copy metafile";
@@ -257,6 +262,12 @@ namespace WindowsFormsApp1
             this.selectAllToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
             this.selectAllToolStripMenuItem.Text = "Select All";
             this.selectAllToolStripMenuItem.Click += new System.EventHandler(this.selectAllToolStripMenuItem_Click);
+            // 
+            // setToGridToolStripMenuItem
+            // 
+            this.setToGridToolStripMenuItem.Name = "setToGridToolStripMenuItem";
+            this.setToGridToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
+            this.setToGridToolStripMenuItem.Text = "Set to grid";
             // 
             // statusStrip1
             // 
@@ -332,7 +343,7 @@ namespace WindowsFormsApp1
             // textBox3
             // 
             this.textBox3.Enabled = false;
-            this.textBox3.Location = new System.Drawing.Point(304, 27);
+            this.textBox3.Location = new System.Drawing.Point(305, 27);
             this.textBox3.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(80, 22);
@@ -394,18 +405,6 @@ namespace WindowsFormsApp1
             this.button1.Text = "Select";
             this.button1.UseVisualStyleBackColor = false;
             this.button1.Click += new System.EventHandler(this.button1_Click);
-            // 
-            // gridSizeToolStripMenuItem
-            // 
-            this.gridSizeToolStripMenuItem.Name = "gridSizeToolStripMenuItem";
-            this.gridSizeToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.gridSizeToolStripMenuItem.Text = "Grid size";
-            // 
-            // setToGridToolStripMenuItem
-            // 
-            this.setToGridToolStripMenuItem.Name = "setToGridToolStripMenuItem";
-            this.setToGridToolStripMenuItem.Size = new System.Drawing.Size(224, 26);
-            this.setToGridToolStripMenuItem.Text = "Set to grid";
             // 
             // buttonGrid
             // 

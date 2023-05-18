@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Drawing;
+using System.Drawing.Imaging;
 using System.IO;
 using System.Runtime.Serialization.Formatters.Binary;
 using System.Threading;
@@ -389,10 +390,16 @@ namespace WindowsFormsApp1
 
         private void copyMetafileToolStripMenuItem_Click(object sender, EventArgs e)
         {
-            //Bitmap bitmap = new Bitmap(pictureBox1.Width, pictureBox1.Height);
-            //pictureBox1.DrawToBitmap(bitmap, new Rectangle(0, 0, pictureBox1.Width, pictureBox1.Height));
-            //Clipboard.SetImage(bitmap.Clone(new Rectangle(GetSelectionRectangleMeta(this).Location, new Size(GetSelectionRectangleMeta(this).Width + 1, GetSelectionRectangleMeta(this).Height + 1)), bitmap.PixelFormat));
-            //((Form1)this.ParentForm).Vstavka(false);
+            Graphics gr = CreateGraphics();
+            IntPtr dc = gr.GetHdc();
+            Metafile mf = new Metafile(dc, EmfType.EmfOnly);
+            gr.ReleaseHdc(dc);
+            gr.Dispose();
+
+            //Bitmap bitmap = new Bitmap("pictopaste");
+            //Form2 form = new Form2();
+            //form.DrawToBitmap(bitmap, new Rectangle(0, 0, form_width,form_height));
+            //Clipboard.SetImage(bitmap.Clone(new Rectangle(Form2.Selected_rect.Location,Form2.Selected_rect.Size), bitmap.PixelFormat));
         }
 
         private void cutoutToolStripMenuItem_Click(object sender, EventArgs e)

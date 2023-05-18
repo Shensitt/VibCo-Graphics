@@ -52,7 +52,7 @@ namespace WindowsFormsApp1
         public static int selected_figure_number;
         //public static bool IsSelectMode = false;
         static bool moveSelected = false;
-        Rectangle Selected_rect = new Rectangle();//прямоугольник выделения
+        public static Rectangle Selected_rect = new Rectangle();//прямоугольник выделения
        // public static int[,] selecter_arr;
        // static int s0x ,s0y ;
 
