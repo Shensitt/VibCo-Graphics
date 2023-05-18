@@ -53,7 +53,7 @@ namespace WindowsFormsApp1
         //public static bool IsSelectMode = false;
         static bool moveSelected = false;
         Rectangle Selected_rect = new Rectangle();//прямоугольник выделения
-        public static int[,] selecter_arr;
+       // public static int[,] selecter_arr;
        // static int s0x ,s0y ;
 
         PictureBox pic = new PictureBox();
@@ -147,7 +147,6 @@ namespace WindowsFormsApp1
                         {
                             Rectangle r = new Rectangle(e.X, e.Y, 0, 0);
                             moveSelected = false;
-                            selected_mas = mas;
                             foreach (var s in selected_figures)
                             {
                                 Rectangle re = new Rectangle(mas[s, 0], mas[s, 1], mas[s, 2], mas[s, 3]);
@@ -433,8 +432,7 @@ namespace WindowsFormsApp1
                         break;
                     case 5:
                         {
-                            if (!moveSelected)
-                            {
+                           
                                     var rect = new Rectangl();
                                 rect.GetPenSet(Color.Gray, 1, Color.Black, false);
                                 rect.DrawFigureCordPoint1(X0,Y0);
@@ -467,25 +465,25 @@ namespace WindowsFormsApp1
                                 }
                                
                                
-                            }
-                            else
-                            {
-                                //foreach (var s in selected_figures)
-                                //{
-                                //    mas[s, 0] += e.X - AutoScrollPosition.X;
-                                //    mas[s, 1] += e.Y - AutoScrollPosition.Y;
-                                //}
-                                //s0x = mas[0, 0];
-                                //s0y = mas[0, 1];
-                            }
-                            
-                            
-                       // rect.Hide(g);
+                           
+
+
+                            // rect.Hide(g);
                         }
                         break;
                 }
             }
             draw_frag = false;
+
+
+            //foreach (var s in selected_figures)
+            //{
+            //    if (mas[s, 2] + mas[s, 0] > mas[s, 8] || mas[s, 3] + mas[s, 1] > mas[s, 7])
+            //    {
+            //        mas = selected_mas;
+            //        Console.Write((mas[s, 2] + mas[s, 0]).ToString());
+            //    }
+            //}
 
             if (figure_selected != 5)
             {
@@ -510,6 +508,7 @@ namespace WindowsFormsApp1
                 draw_point = null;
                 data.point_mas = point_mas;
                 data.mas = mas;
+                selected_mas = mas;
 
                 var dataToSave = new
                 {
